@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/server/db/generated"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+enum ItemCategory {
+  TECH    @map("tech")
+  CLOTHES @map("clothing")
+  TOOLS   @map("tools")
+  LEGOS   @map("legos")
+}
+
+enum ItemType {
+  SMALL  @map("base") // $0 - $50
+  MEDIUM @map("medium") // $50 - $100
+  LARGE  @map("high") // $100 - $200
+}
+
+model Item {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  priceCents  Int
+
+  category ItemCategory
+  type     ItemType
+}
