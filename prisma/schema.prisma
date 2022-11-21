@@ -57,10 +57,10 @@ model VerificationToken {
 }
 
 enum ItemCategory {
-  TECH    @map("tech")
-  CLOTHES @map("clothing")
-  TOOLS   @map("tools")
-  LEGOS   @map("legos")
+  tech     @map("tech")
+  clothing @map("clothing")
+  tools    @map("tools")
+  legos    @map("legos")
 }
 
 enum ItemType {
@@ -69,20 +69,38 @@ enum ItemType {
   LARGE  @map("high") // $100 - $200
 }
 
+enum ItemVendor {
+  Amazon
+  HomeDepot
+  Lego
+  BHPhoto
+}
+
 model Item {
-  id          String @id @default(cuid())
+  id          String     @id @default(cuid())
   name        String
   description String
+  imgUrl      String
+  itemUrl     String
+  vendor      ItemVendor
   priceCents  Int
+  createdAt   DateTime
 
   category ItemCategory
   type     ItemType
+
+  isClaimed Boolean    @default(false)
+  claimedAt DateTime
+  claimerId String?
+  claimer   Referrers? @relation(references: [id], fields: [claimerId], onDelete: SetNull)
 }
 
 model Referrers {
   id   String @id @default(cuid())
   name String
   ref  String @unique
+
+  claimedItems Item[]
 
   @@index([ref])
 }
