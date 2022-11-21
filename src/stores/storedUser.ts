@@ -1,5 +1,5 @@
 import create from "zustand";
-import { persist } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
 interface StoredUserData {
   user: {
@@ -13,9 +13,11 @@ interface StoredUserActions {
 }
 
 export const useStoredUser = create<StoredUserData & StoredUserActions>()(
-  persist((set) => ({
-    user: null,
+  devtools(
+    persist((set) => ({
+      user: null,
 
-    setUser: (user) => set({ user }),
-  }))
+      setUser: (user) => set({ user }),
+    }))
+  )
 );
