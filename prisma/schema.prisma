@@ -74,6 +74,7 @@ enum ItemVendor {
   HomeDepot
   Lego
   BHPhoto
+  Other
 }
 
 model Item {
@@ -90,7 +91,7 @@ model Item {
   type     ItemType
 
   isClaimed Boolean    @default(false)
-  claimedAt DateTime
+  claimedAt DateTime?
   claimerId String?
   claimer   Referrers? @relation(references: [id], fields: [claimerId], onDelete: SetNull)
 }
