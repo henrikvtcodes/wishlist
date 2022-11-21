@@ -9,10 +9,12 @@ export const serverSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]),
   DATABASE_URL: z.string().url(),
   ADMIN_EMAIL: z.string().email(),
+  REVALIDATE_AUTH_TOKEN: z.string(),
   NEXTAUTH_URL:
     process.env.NODE_ENV === "production"
       ? z.string().url().optional()
       : z.string().url(),
+  NEXTAUTH_SECRET: z.string(),
 });
 
 /**
