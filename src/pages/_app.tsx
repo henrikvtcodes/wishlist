@@ -1,14 +1,11 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { Inter } from "@next/font/google";
 
 import { trpc } from "../utils/trpc";
 import { UserWatcher } from "components/UserWatcher";
 
 import "../styles/globals.css";
-
-const inter = Inter();
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,11 +13,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <>
-      <style jsx global>{`
-        html {
-          font-family: ${inter.style.fontFamily};
-        }
-      `}</style>
+      <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       <SessionProvider session={session}>
         <UserWatcher />
         <Component {...pageProps} />
