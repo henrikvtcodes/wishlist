@@ -6,6 +6,7 @@ import { trpc } from "../utils/trpc";
 import { UserWatcher } from "components/UserWatcher";
 
 import "../styles/globals.css";
+import PlausibleProvider from "next-plausible";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,7 +17,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       <SessionProvider session={session}>
         <UserWatcher />
-        <Component {...pageProps} />
+        <PlausibleProvider
+          domain="wishlist.henriktech.com"
+          trackOutboundLinks
+          exclude="/admin/*"
+        >
+          <Component {...pageProps} />
+        </PlausibleProvider>
       </SessionProvider>
     </>
   );
