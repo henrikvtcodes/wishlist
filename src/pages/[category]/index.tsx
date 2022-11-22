@@ -11,13 +11,7 @@ import type {
 import { ItemCategory } from "server/db/generated";
 import { ssgHelpers } from "server/trpc/ssg";
 import { trpc } from "utils/trpc";
-
-const categoryToTitleMap = {
-  tech: "Techology & Electronics",
-  tools: "Tools",
-  legos: "Legos",
-  clothing: "Clothing",
-};
+import { categoryToTitleMap } from "utils/constants";
 
 const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   category,
