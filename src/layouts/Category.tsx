@@ -5,7 +5,9 @@ export const CategoryLayout: FC<{ children?: ReactNode }> = ({ children }) => {
   return (
     <div className="min-h-screen w-screen bg-gray-100">
       <Header />
-      <main> {children} </main>
+      <main className="flex w-screen flex-col items-center justify-start divide-y-2 divide-gray-300">
+        {children}
+      </main>
     </div>
   );
 };
