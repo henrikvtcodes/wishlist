@@ -15,20 +15,32 @@ export type ItemPick = Pick<
 
 export const ItemCard = ({ item }: { item: ItemPick }) => {
   return (
-    <div className="flex h-fit w-full flex-col rounded-lg bg-gray-200 p-4 sm:w-1/2 lg:w-5/12">
+    <div className="flex h-fit w-full flex-col rounded-lg bg-gray-200 p-4 sm:w-1/3">
       <div className=" relative h-80 w-full overflow-hidden rounded-t-lg">
         <Image
           src={item.imgUrl}
           alt={"Image of " + item.name}
-          className="object-cover"
+          className="object-contain"
           fill
         />
       </div>
       <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
         <h3>{item.name}</h3>
-        <p>{item.priceCents / 100}</p>
+        <p>
+          <span className="font-bold">$</span>
+          {item.priceCents / 100}
+        </p>
       </div>
-      <p className="mt-1 text-sm italic text-gray-500">{item.description}</p>
+      <p className="mt-1 text-sm italic text-gray-600">{item.description}</p>
+      <span className="mt-auto flex flex-col justify-evenly pt-2">
+        <a href={item.itemUrl} className="btn-2nd ">
+          <span className="mx-auto">
+            {item.vendor === "Other"
+              ? `Go to item`
+              : `See item at ${item.vendor}`}
+          </span>
+        </a>
+      </span>
     </div>
   );
 };

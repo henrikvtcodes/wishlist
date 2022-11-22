@@ -1,5 +1,6 @@
 import { ItemCard } from "components/ItemDisplays/ItemCard";
 import { LargeItemDisplay } from "components/ItemDisplays/LargeItemDisplay";
+import { MediumItemDisplay } from "components/ItemDisplays/MediumItemDisplay";
 import { CategoryLayout } from "layouts/Category";
 import type {
   GetStaticPaths,
@@ -29,11 +30,7 @@ const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <h1 className="my-8 text-4xl font-semibold">{title}</h1>
       <LargeItemDisplay items={items?.large} />
 
-      <section>
-        {items?.medium.map((item) => (
-          <ItemCard item={item} key={item.id} />
-        ))}
-      </section>
+      <MediumItemDisplay items={items?.medium} />
 
       <section>
         {items?.small.map((item) => (
