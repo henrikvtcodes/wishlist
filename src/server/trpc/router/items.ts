@@ -4,6 +4,7 @@ import { z } from "zod";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 
 const prismaItemSelect = Prisma.validator<Prisma.ItemSelect>()({
+  id: true,
   name: true,
   description: true,
   imgUrl: true,
