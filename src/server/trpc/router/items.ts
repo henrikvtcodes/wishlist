@@ -1,7 +1,8 @@
-import { createItemSchema } from "schemas/item";
+import { createItemSchema, updateItemSchema } from "schemas/item";
 import { ItemCategory, ItemType, Prisma } from "server/db/generated";
 import { z } from "zod";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
+import { requestRevalidate } from "server/common/makeRevalidateRequest";
 
 const prismaItemSelect = Prisma.validator<Prisma.ItemSelect>()({
   id: true,
@@ -40,6 +41,12 @@ export const itemsRouter = router({
 
       return items;
     }),
+
+  all: protectedProcedure.query(async ({ ctx }) => {
+    const items = await ctx.prisma.item.findMany();
+
+    return items;
+  }),
 
   byCategory: publicProcedure
     .input(
@@ -110,6 +117,42 @@ export const itemsRouter = router({
           createdAt: new Date(),
         },
       });
+
+      await requestRevalidate(input.category);
+    }),
+
+  update: protectedProcedure
+    .input(z.object({ itemId: z.string().cuid(), data: updateItemSchema }))
+    .mutation(async ({ ctx, input }) => {
+      const newItem = await ctx.prisma.item.update({
+        where: {
+          id: input.itemId,
+        },
+        data: {
+          name: input.data.name,
+          description: input.data.description,
+          imgUrl: input.data.imgUrl,
+          itemUrl: input.data.itemUrl,
+          priceCents: input.data.price ? input.data.price * 100 : undefined,
+          vendor: input.data.vendor,
+          category: input.data.category,
+          type: input.data.type,
+        },
+      });
+
+      await requestRevalidate(newItem.category);
+    }),
+
+  delete: protectedProcedure
+    .input(z.object({ itemId: z.string().cuid() }))
+    .mutation(async ({ ctx, input }) => {
+      const deleted = await ctx.prisma.item.delete({
+        where: {
+          id: input.itemId,
+        },
+      });
+
+      await requestRevalidate(deleted.category);
     }),
 
   claim: publicProcedure
