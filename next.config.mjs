@@ -9,5 +9,13 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.com",
+      },
+    ],
+  },
 };
 export default config;
