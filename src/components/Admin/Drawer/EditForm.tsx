@@ -1,8 +1,8 @@
-import type { UseFormWatch } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Item } from "server/db/generated";
 import { ItemCategory, ItemType } from "server/db/generated";
+import currency from "currency.js";
 
 import { updateItemSchema, type UpdateItemType } from "schemas/item";
 import { trpc } from "utils/trpc";
@@ -11,26 +11,7 @@ import { LargeItemCard } from "components/ItemDisplays/LargeItemCard";
 import type { ItemPick } from "components/ItemDisplays/ItemCard";
 import { ItemCard } from "components/ItemDisplays/ItemCard";
 import { FormErrors } from "./FormErrors";
-import currency from "currency.js";
-
-const itemData: (
-  item: ItemPick,
-  watch: UseFormWatch<UpdateItemType>
-) => ItemPick = (item, watch) => {
-  return {
-    id: item.id,
-    name: watch("name") ?? item.name,
-    description: watch("description") ?? item.description,
-    imgUrl: watch("imgUrl") ?? item.imgUrl,
-    itemUrl: watch("itemUrl") ?? item.itemUrl,
-    priceCents:
-      watch("price") !== undefined
-        ? currency(watch("price") ?? "0").intValue
-        : currency(item.priceCents, { fromCents: true }).intValue,
-    isClaimed: item.isClaimed,
-    vendor: watch("vendor") ?? item.vendor,
-  };
-};
+import { itemData } from "./utils";
 
 export const EditForm = ({
   id,
