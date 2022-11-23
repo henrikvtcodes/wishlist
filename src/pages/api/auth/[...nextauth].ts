@@ -14,6 +14,10 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+
+    signIn({ email }) {
+      return env.NODE_ENV === "production" ? email === env.ADMIN_EMAIL : false;
+    },
   },
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
