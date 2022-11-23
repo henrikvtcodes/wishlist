@@ -12,6 +12,7 @@ import { ItemCategory } from "server/db/generated";
 import { ssgHelpers } from "server/trpc/ssg";
 import { trpc } from "utils/trpc";
 import { categoryToTitleMap } from "utils/constants";
+import { NextSeo } from "next-seo";
 
 const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   category,
@@ -21,6 +22,7 @@ const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
   return (
     <CategoryLayout>
+      <NextSeo title={title} />
       <h1 className="my-8 text-4xl font-semibold">{title}</h1>
       <LargeItemDisplay items={items?.large} />
 

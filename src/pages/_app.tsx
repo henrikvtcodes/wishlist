@@ -7,6 +7,8 @@ import { UserWatcher } from "components/UserWatcher";
 
 import "../styles/globals.css";
 import PlausibleProvider from "next-plausible";
+import { DefaultSeo } from "next-seo";
+import SEO from "DefaultSEO";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -22,6 +24,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           trackOutboundLinks
           exclude="/admin/*"
         >
+          <DefaultSeo {...SEO} />
           <Component {...pageProps} />
         </PlausibleProvider>
       </SessionProvider>
