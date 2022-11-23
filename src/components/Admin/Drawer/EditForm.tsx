@@ -98,7 +98,6 @@ export const EditForm = ({
           <div className="mt-1">
             <textarea
               rows={6}
-              maxLength={256}
               {...register("description")}
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
             />

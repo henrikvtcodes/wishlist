@@ -4,7 +4,7 @@ import currency from "currency.js";
 
 export const createItemSchema = z.object({
   name: z.string().max(48),
-  description: z.string().max(256).default(""),
+  description: z.string().max(512).default(""),
   imgUrl: z.string().url(),
   itemUrl: z.string().url(),
   price: z.preprocess(
