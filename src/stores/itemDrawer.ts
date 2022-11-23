@@ -18,7 +18,7 @@ interface DrawerActions {
   closeDrawer: () => void;
 }
 
-export const useDrawer = create<DrawerData & DrawerActions>()((set) => ({
+export const useItemDrawer = create<DrawerData & DrawerActions>()((set) => ({
   context: null,
 
   openDrawer: (ctx) => set({ context: ctx }),
