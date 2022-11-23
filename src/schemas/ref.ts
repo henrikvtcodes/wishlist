@@ -1,7 +1,11 @@
 import { z } from "zod";
 
 export const createRefSchema = z.object({
-  ref: z.string().min(1).max(32),
+  ref: z
+    .string()
+    .min(2)
+    .max(32)
+    .regex(/^[a-z0-9]+$/),
   name: z.string().min(1).max(32),
 });
 
