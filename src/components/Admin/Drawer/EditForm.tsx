@@ -10,6 +10,8 @@ import { useDrawer } from "stores/drawer";
 import { LargeItemCard } from "components/ItemDisplays/LargeItemCard";
 import type { ItemPick } from "components/ItemDisplays/ItemCard";
 import { ItemCard } from "components/ItemDisplays/ItemCard";
+import { FormErrors } from "./FormErrors";
+import currency from "currency.js";
 
 const itemData: (
   item: ItemPick,
@@ -21,7 +23,10 @@ const itemData: (
     description: watch("description") ?? item.description,
     imgUrl: watch("imgUrl") ?? item.imgUrl,
     itemUrl: watch("itemUrl") ?? item.itemUrl,
-    priceCents: Number(watch("price")) * 100 ?? item.priceCents,
+    priceCents:
+      watch("price") !== undefined
+        ? currency(watch("price") ?? "0").intValue
+        : currency(item.priceCents, { fromCents: true }).intValue,
     isClaimed: item.isClaimed,
     vendor: watch("vendor") ?? item.vendor,
   };
@@ -34,7 +39,12 @@ export const EditForm = ({
   id: string;
   item: ItemPick & Pick<Item, "category" | "type">;
 }) => {
-  const { register, handleSubmit, watch } = useForm<UpdateItemType>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<UpdateItemType>({
     resolver: zodResolver(updateItemSchema),
     mode: "onChange",
     defaultValues: {
@@ -42,11 +52,12 @@ export const EditForm = ({
       description: item.description,
       imgUrl: item.imgUrl,
       itemUrl: item.itemUrl,
-      price: item.priceCents / 100,
+      price: currency(item.priceCents, { fromCents: true }).value,
       vendor: item.vendor,
       category: item.category,
       type: item.type,
     },
+    shouldUseNativeValidation: true,
   });
 
   const trpcUtils = trpc.useContext();
@@ -76,7 +87,7 @@ export const EditForm = ({
         (item.type === ItemType.LARGE ? (
           <LargeItemCard item={itemData(item, watch)} sizingOverride />
         ) : (
-          <ItemCard item={item} sizingOverride />
+          <ItemCard item={itemData(item, watch)} sizingOverride />
         ))}
 
       <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-y-4">
@@ -125,7 +136,7 @@ export const EditForm = ({
               type={"text"}
               {...register("imgUrl")}
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-              placeholder="Item Name"
+              placeholder="Image URL"
             />
           </div>
         </div>
@@ -142,7 +153,7 @@ export const EditForm = ({
               type={"text"}
               {...register("itemUrl")}
               className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-              placeholder="Item Name"
+              placeholder="Item URL"
             />
           </div>
         </div>
@@ -159,10 +170,11 @@ export const EditForm = ({
               <span className="text-gray-500 sm:text-sm">$</span>
             </div>
             <input
-              type="text"
+              type="number"
+              min={0}
+              step={0.01}
               {...register("price")}
               className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-              placeholder="0.00"
               aria-describedby="price-currency"
             />
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -217,6 +229,8 @@ export const EditForm = ({
             Delete Item
           </button>
         </div>
+
+        <FormErrors errors={errors} />
       </form>
     </>
   );

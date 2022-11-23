@@ -3,12 +3,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createItemSchema, type CreateItemType } from "schemas/item";
 import { trpc } from "utils/trpc";
 import { useDrawer } from "stores/drawer";
-import { ItemCategory, ItemType } from "server/db/generated";
+import { ItemCategory, ItemType, ItemVendor } from "server/db/generated";
+import { FormErrors } from "./FormErrors";
 
 export const CreateForm = () => {
-  const { register, handleSubmit } = useForm<CreateItemType>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateItemType>({
     resolver: zodResolver(createItemSchema),
     mode: "onChange",
+    shouldUseNativeValidation: true,
   });
 
   const { mutateAsync: createItem } = trpc.items.create.useMutation();
@@ -19,6 +25,8 @@ export const CreateForm = () => {
     await createItem(data);
     close();
   });
+
+  console.log({ errors });
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-y-4">
@@ -67,7 +75,7 @@ export const CreateForm = () => {
             type={"text"}
             {...register("imgUrl")}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-            placeholder="Item Name"
+            placeholder="Image URL"
           />
         </div>
       </div>
@@ -84,7 +92,7 @@ export const CreateForm = () => {
             type={"text"}
             {...register("itemUrl")}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-            placeholder="Item Name"
+            placeholder="Item URL"
           />
         </div>
       </div>
@@ -101,10 +109,11 @@ export const CreateForm = () => {
             <span className="text-gray-500 sm:text-sm">$</span>
           </div>
           <input
-            type="text"
+            type="number"
+            min={0}
+            step={0.01}
             {...register("price")}
             className="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-            placeholder="0.00"
             aria-describedby="price-currency"
           />
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -150,11 +159,32 @@ export const CreateForm = () => {
         </select>
       </div>
 
+      <div>
+        <label
+          htmlFor="vendor"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Vendor
+        </label>
+        <select
+          {...register("vendor")}
+          className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        >
+          <option value={ItemVendor.Amazon}>Amazon</option>
+          <option value={ItemVendor.BHPhoto}>B & H Photo Video</option>
+          <option value={ItemVendor.HomeDepot}>HomeDepot</option>
+          <option value={ItemVendor.Lego}>Lego</option>
+          <option value={ItemVendor.Other}>Other</option>
+        </select>
+      </div>
+
       <div className="flex justify-between">
         <button type="submit" className="btn">
-          Update Item
+          Create Item
         </button>
       </div>
+
+      <FormErrors errors={errors} />
     </form>
   );
 };

@@ -21,6 +21,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.33.0
   autoprefixer: ^10.4.7
   clsx: ^1.2.1
+  currency.js: ^2.0.4
   eslint: ^8.26.0
   eslint-config-next: 13.0.2
   next: 13.0.2
@@ -55,6 +56,7 @@ dependencies:
   '@trpc/react-query': 10.0.0-rc.4_q2ykz5ry7uzzhix6pf4rsmetbu
   '@trpc/server': 10.0.0-rc.4
   clsx: 1.2.1
+  currency.js: 2.0.4
   next: 13.0.2_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.17.0_pknogjuzx4bv7zxtatcb2ahtsq
   next-plausible: 3.6.4_pknogjuzx4bv7zxtatcb2ahtsq
@@ -964,6 +966,11 @@ packages:
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
     dev: true
+
+  /currency.js/2.0.4:
+    resolution: {integrity: sha512-6/OplJYgJ0RUlli74d93HJ/OsKVBi8lB1+Z6eJYS1YZzBuIp4qKKHpJ7ad+GvTlWmLR/hLJOWTykN5Nm8NJ7+w==}
+    engines: {node: '>=4'}
+    dev: false
 
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}

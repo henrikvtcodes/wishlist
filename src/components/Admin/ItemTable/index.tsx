@@ -1,16 +1,27 @@
 import { trpc } from "utils/trpc";
 import { useDrawer } from "stores/drawer";
+import clsx from "clsx";
+import currency from "currency.js";
 
 export const ItemTable = () => {
-  const { data: items } = trpc.items.all.useQuery();
+  const { data: items, isFetching } = trpc.items.all.useQuery();
 
   const openDrawer = useDrawer((state) => state.openDrawer);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
+        <div className="flex items-center sm:flex-auto">
           <h1 className="text-xl font-semibold text-gray-900">Items</h1>
+
+          <span
+            className={clsx(
+              "ml-4 animate-pulse rounded bg-blue-200 py-1 px-2 text-blue-600 transition delay-150 ease-in-out",
+              isFetching ? "visible" : "hidden"
+            )}
+          >
+            Loading...
+          </span>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <button
@@ -89,11 +100,11 @@ export const ItemTable = () => {
                         <span className="font-medium text-blue-500 underline decoration-dotted underline-offset-2">
                           View
                         </span>
-                        <aside className=""></aside>
+                        {/* <aside className=""></aside> */}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         <span className="font-semibold">$</span>
-                        {item.priceCents / 100}
+                        {currency(item.priceCents, { fromCents: true }).value}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {item.vendor}

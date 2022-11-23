@@ -3,6 +3,7 @@ import { ItemCategory, ItemType, Prisma } from "server/db/generated";
 import { z } from "zod";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 import { requestRevalidate } from "server/common/makeRevalidateRequest";
+import currency from "currency.js";
 
 const prismaItemSelect = Prisma.validator<Prisma.ItemSelect>()({
   id: true,
@@ -116,13 +117,15 @@ export const itemsRouter = router({
   create: protectedProcedure
     .input(createItemSchema)
     .mutation(async ({ ctx, input }) => {
+      console.log("create item", { input });
+
       await ctx.prisma.item.create({
         data: {
           name: input.name,
           description: input.description,
           imgUrl: input.imgUrl,
           itemUrl: input.itemUrl,
-          priceCents: input.price * 100,
+          priceCents: currency(input.price).intValue,
           vendor: input.vendor,
           category: input.category,
           type: input.type,
@@ -137,6 +140,8 @@ export const itemsRouter = router({
   update: protectedProcedure
     .input(z.object({ itemId: z.string().cuid(), data: updateItemSchema }))
     .mutation(async ({ ctx, input }) => {
+      console.log("update item", { input });
+
       const newItem = await ctx.prisma.item.update({
         where: {
           id: input.itemId,
@@ -146,7 +151,9 @@ export const itemsRouter = router({
           description: input.data.description,
           imgUrl: input.data.imgUrl,
           itemUrl: input.data.itemUrl,
-          priceCents: input.data.price ? input.data.price * 100 : undefined,
+          priceCents: input.data.price
+            ? currency(input.data.price).intValue
+            : undefined,
           vendor: input.data.vendor,
           category: input.data.category,
           type: input.data.type,
