@@ -15,8 +15,12 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
 
-    signIn({ email }) {
-      return env.NODE_ENV === "production" ? email === env.ADMIN_EMAIL : false;
+    signIn({ user }) {
+      console.log({ email: user.email, adminEmail: env.ADMIN_EMAIL });
+
+      return env.NODE_ENV === "production"
+        ? user.email === env.ADMIN_EMAIL
+        : false;
     },
   },
   // Configure one or more authentication providers
