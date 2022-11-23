@@ -1,0 +1,20 @@
+{
+  "linter": {
+    "enabled": true,
+    "ignore": [
+      "src/server/db/generated/**/*.{js,ts,d.ts}",
+      "node_modules",
+      ".next"
+    ],
+    "rules": {
+      "recommended": true,
+      "style": {
+        "noImplicitBoolean": "off"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "ignore": ["src/server/db/generated", "node_modules", ".next"]
+  }
+}

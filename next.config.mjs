@@ -25,5 +25,8 @@ const config = {
       },
     ],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 export default withPlausible(config);
