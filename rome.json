@@ -1,6 +1,6 @@
 {
   "linter": {
-    "enabled": true,
+    "enabled": false,
     "ignore": [
       "src/server/db/generated/**/*.{js,ts,d.ts}",
       "node_modules",
@@ -14,7 +14,7 @@
     }
   },
   "formatter": {
-    "enabled": true,
+    "enabled": false,
     "ignore": ["src/server/db/generated", "node_modules", ".next"]
   }
 }
