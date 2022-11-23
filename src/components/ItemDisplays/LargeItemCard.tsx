@@ -31,7 +31,12 @@ export const LargeItemCard = ({
       </div>
       <p className="mt-1 text-sm italic text-gray-600">{item.description}</p>
       <span className="mt-auto flex flex-col justify-evenly  pt-2 md:flex-row">
-        <a href={item.itemUrl} className="btn-2nd md:w-1/2">
+        <a
+          href={item.itemUrl}
+          className="btn-2nd md:w-1/2"
+          target={"_blank"}
+          rel="noreferrer"
+        >
           <span className="mx-auto">
             {item.vendor === "Other"
               ? "Go to item"
