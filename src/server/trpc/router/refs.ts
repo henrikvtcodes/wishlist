@@ -13,6 +13,16 @@ export const refsRouter = router({
       });
     }),
 
+  get: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      return await ctx.prisma.referrers.findUniqueOrThrow({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
+
   all: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.prisma.referrers.findMany();
   }),
@@ -26,11 +36,11 @@ export const refsRouter = router({
     }),
 
   update: protectedProcedure
-    .input(z.object({ id: z.string(), data: updateRefSchema }))
+    .input(z.object({ refId: z.string(), data: updateRefSchema }))
     .mutation(async ({ ctx, input }) => {
       return await ctx.prisma.referrers.update({
         where: {
-          id: input.id,
+          id: input.refId,
         },
         data: input.data,
       });
