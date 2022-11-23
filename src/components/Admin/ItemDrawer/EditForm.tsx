@@ -6,7 +6,7 @@ import currency from "currency.js";
 
 import { updateItemSchema, type UpdateItemType } from "schemas/item";
 import { trpc } from "utils/trpc";
-import { useDrawer } from "stores/drawer";
+import { useItemDrawer } from "stores/itemDrawer";
 import { LargeItemCard } from "components/ItemDisplays/LargeItemCard";
 import type { ItemPick } from "components/ItemDisplays/ItemCard";
 import { ItemCard } from "components/ItemDisplays/ItemCard";
@@ -47,7 +47,7 @@ export const EditForm = ({
   const { mutateAsync: updateItem } = trpc.items.update.useMutation();
   const { mutateAsync: deleteItem } = trpc.items.delete.useMutation();
 
-  const close = useDrawer((state) => state.closeDrawer);
+  const close = useItemDrawer((state) => state.closeDrawer);
 
   const [isLoading, setIsLoading] = useState(false);
 

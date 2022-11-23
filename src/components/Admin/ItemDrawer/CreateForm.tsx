@@ -5,7 +5,7 @@ import { createItemSchema, type CreateItemType } from "schemas/item";
 import { ItemCategory, ItemType, ItemVendor } from "server/db/generated";
 import { FormErrors } from "./FormErrors";
 import { trpc } from "utils/trpc";
-import { useDrawer } from "stores/drawer";
+import { useItemDrawer } from "stores/itemDrawer";
 import { useState } from "react";
 
 export const CreateForm = () => {
@@ -23,7 +23,7 @@ export const CreateForm = () => {
 
   const trpcUtils = trpc.useContext();
 
-  const close = useDrawer((state) => state.closeDrawer);
+  const close = useItemDrawer((state) => state.closeDrawer);
 
   const [isLoading, setIsLoading] = useState(false);
 

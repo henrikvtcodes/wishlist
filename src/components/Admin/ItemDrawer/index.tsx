@@ -2,13 +2,13 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-import { useDrawer } from "stores/drawer";
+import { useItemDrawer } from "stores/itemDrawer";
 import { CreateForm } from "./CreateForm";
 import { EditFormWrapper } from "./EditForm";
 
 export const ItemDrawer = () => {
-  const ctx = useDrawer((state) => state.context);
-  const close = useDrawer((state) => state.closeDrawer);
+  const ctx = useItemDrawer((state) => state.context);
+  const close = useItemDrawer((state) => state.closeDrawer);
 
   return (
     <Transition.Root show={!!ctx} as={Fragment}>
