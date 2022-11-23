@@ -1,12 +1,12 @@
 import { trpc } from "utils/trpc";
-import { useDrawer } from "stores/drawer";
+import { useItemDrawer } from "stores/itemDrawer";
 import clsx from "clsx";
 import currency from "currency.js";
 
 export const ItemTable = () => {
   const { data: items, isFetching } = trpc.items.all.useQuery();
 
-  const openDrawer = useDrawer((state) => state.openDrawer);
+  const openDrawer = useItemDrawer((state) => state.openDrawer);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
