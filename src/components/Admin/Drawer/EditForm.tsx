@@ -12,6 +12,7 @@ import type { ItemPick } from "components/ItemDisplays/ItemCard";
 import { ItemCard } from "components/ItemDisplays/ItemCard";
 import { FormErrors } from "./FormErrors";
 import { itemData } from "./utils";
+import { useState } from "react";
 
 export const EditForm = ({
   id,
@@ -48,17 +49,23 @@ export const EditForm = ({
 
   const close = useDrawer((state) => state.closeDrawer);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = handleSubmit(async (data) => {
+    setIsLoading(true);
     await updateItem({ itemId: id, data });
     trpcUtils.items.invalidate();
     close();
+    setIsLoading(false);
   });
 
   const onDelete = async () => {
+    setIsLoading(true);
     trpcUtils.items.one.cancel({ id });
     await deleteItem({ itemId: id });
     trpcUtils.items.invalidate();
     close();
+    setIsLoading(false);
   };
 
   return (
@@ -201,12 +208,25 @@ export const EditForm = ({
         </div>
 
         <div className="flex justify-between">
-          <button type="submit" className="btn">
-            Update Item
+          <button type="submit" className="btn" disabled={isLoading}>
+            {isLoading ? (
+              <span className=" italic">Loading</span>
+            ) : (
+              "Update Item"
+            )}
           </button>
 
-          <button type="button" className="btn-danger" onClick={onDelete}>
-            Delete Item
+          <button
+            type="button"
+            className="btn-danger"
+            onClick={onDelete}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <span className=" italic">Loading</span>
+            ) : (
+              "Update Item"
+            )}
           </button>
         </div>
 

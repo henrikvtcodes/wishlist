@@ -6,6 +6,7 @@ import { ItemCategory, ItemType, ItemVendor } from "server/db/generated";
 import { FormErrors } from "./FormErrors";
 import { trpc } from "utils/trpc";
 import { useDrawer } from "stores/drawer";
+import { useState } from "react";
 
 export const CreateForm = () => {
   const {
@@ -24,13 +25,15 @@ export const CreateForm = () => {
 
   const close = useDrawer((state) => state.closeDrawer);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = handleSubmit(async (data) => {
+    setIsLoading(true);
     await createItem(data);
     trpcUtils.items.invalidate();
     close();
+    setIsLoading(false);
   });
-
-  console.log({ errors });
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-y-4">
@@ -182,8 +185,8 @@ export const CreateForm = () => {
       </div>
 
       <div className="flex justify-between">
-        <button type="submit" className="btn">
-          Create Item
+        <button type="submit" className="btn" disabled={isLoading}>
+          {isLoading ? <span className=" italic">Loading</span> : "Create Item"}
         </button>
       </div>
 
