@@ -90,10 +90,11 @@ model Item {
   category ItemCategory
   type     ItemType
 
-  isClaimed Boolean    @default(false)
-  claimedAt DateTime?
-  claimerId String?
-  claimer   Referrers? @relation(references: [id], fields: [claimerId], onDelete: SetNull)
+  isClaimable Boolean    @default(true)
+  isClaimed   Boolean    @default(false)
+  claimedAt   DateTime?
+  claimerId   String?
+  claimer     Referrers? @relation(references: [id], fields: [claimerId], onDelete: SetNull)
 }
 
 model Referrers {
