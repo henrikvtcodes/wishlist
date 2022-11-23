@@ -63,6 +63,7 @@ export const EditForm = ({
   });
 
   const onDelete = async () => {
+    trpcUtils.items.one.cancel({ id });
     await deleteItem({ itemId: id });
     trpcUtils.items.invalidate();
     close();
