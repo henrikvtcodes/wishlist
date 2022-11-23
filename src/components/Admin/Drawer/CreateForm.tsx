@@ -20,10 +20,13 @@ export const CreateForm = () => {
 
   const { mutateAsync: createItem } = trpc.items.create.useMutation();
 
+  const trpcUtils = trpc.useContext();
+
   const close = useDrawer((state) => state.closeDrawer);
 
   const onSubmit = handleSubmit(async (data) => {
     await createItem(data);
+    trpcUtils.items.invalidate();
     close();
   });
 
