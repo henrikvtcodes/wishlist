@@ -1,7 +1,10 @@
 import { trpc } from "utils/trpc";
+import { useDrawer } from "stores/drawer";
 
 export const ItemTable = () => {
   const { data: items } = trpc.items.all.useQuery();
+
+  const openDrawer = useDrawer((state) => state.openDrawer);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -12,9 +15,10 @@ export const ItemTable = () => {
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <button
             type="button"
+            onClick={() => openDrawer({ type: "create" })}
             className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto"
           >
-            Add user
+            Add item
           </button>
         </div>
       </div>
@@ -102,12 +106,14 @@ export const ItemTable = () => {
                       </td>
 
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <a
-                          href="#"
+                        <button
+                          onClick={() =>
+                            openDrawer({ type: "edit", id: item.id })
+                          }
                           className="text-blue-600 hover:text-blue-900"
                         >
                           Edit<span className="sr-only">, {item.name}</span>
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}

@@ -100,6 +100,19 @@ export const itemsRouter = router({
       return { large, medium, small };
     }),
 
+  one: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const item = await ctx.prisma.item.findFirstOrThrow({
+        where: {
+          id: input.id,
+        },
+        select: { ...prismaItemSelect, type: true, category: true },
+      });
+
+      return item;
+    }),
+
   create: protectedProcedure
     .input(createItemSchema)
     .mutation(async ({ ctx, input }) => {

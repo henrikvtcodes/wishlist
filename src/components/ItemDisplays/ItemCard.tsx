@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Image from "next/image";
 import type { Item } from "server/db/generated";
 
@@ -13,9 +14,20 @@ export type ItemPick = Pick<
   | "itemUrl"
 >;
 
-export const ItemCard = ({ item }: { item: ItemPick }) => {
+export const ItemCard = ({
+  item,
+  sizingOverride = false,
+}: {
+  item: ItemPick;
+  sizingOverride?: boolean;
+}) => {
   return (
-    <div className="flex h-fit w-full flex-col rounded-lg bg-gray-200 p-4 sm:w-1/3">
+    <div
+      className={clsx(
+        "flex h-fit w-full flex-col rounded-lg bg-gray-200 p-4 ",
+        sizingOverride ? "w-full" : "sm:w-1/3"
+      )}
+    >
       <div className=" relative h-80 w-full overflow-hidden rounded-t-lg">
         <Image
           src={item.imgUrl}
