@@ -25,9 +25,11 @@ export const LargeItemCard = ({
           fill
         />
       </div>
-      <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
+      <div className="mt-4 flex flex-col text-base font-medium text-gray-900">
         <h3>{item.name}</h3>
-        <p>{currency(item.priceCents, { fromCents: true }).format()}</p>
+        <p className="my-1 w-min rounded bg-blue-200 p-1">
+          {currency(item.priceCents, { fromCents: true }).format()}
+        </p>{" "}
       </div>
       <p className="mt-1 text-sm italic text-gray-600">{item.description}</p>
       <span className="mt-auto flex flex-col justify-evenly  pt-2 md:flex-row">
