@@ -1,4 +1,3 @@
-import { ItemCard } from "components/ItemDisplays/ItemCard";
 import { LargeItemDisplay } from "components/ItemDisplays/LargeItemDisplay";
 import { MediumItemDisplay } from "components/ItemDisplays/MediumItemDisplay";
 import { CategoryLayout } from "layouts/Category";
@@ -28,11 +27,7 @@ const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
       <MediumItemDisplay items={items?.medium} />
 
-      <section>
-        {items?.small.map((item) => (
-          <ItemCard item={item} key={item.id} />
-        ))}
-      </section>
+      <MediumItemDisplay items={items?.small} />
     </CategoryLayout>
   );
 };
