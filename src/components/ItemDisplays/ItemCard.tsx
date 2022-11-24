@@ -2,6 +2,7 @@ import clsx from "clsx";
 import currency from "currency.js";
 import Image from "next/image";
 import type { Item } from "server/db/generated";
+import { ClaimButton } from "./ClaimButton";
 
 export type ItemPick = Pick<
   Item,
@@ -13,6 +14,7 @@ export type ItemPick = Pick<
   | "priceCents"
   | "vendor"
   | "itemUrl"
+  | "isClaimable"
 >;
 
 export const ItemCard = ({
@@ -44,7 +46,7 @@ export const ItemCard = ({
         </p>
       </div>
       <p className="mt-1 text-sm italic text-gray-600">{item.description}</p>
-      <span className="mt-auto flex flex-col justify-evenly pt-2">
+      <span className="mt-auto flex flex-col justify-evenly gap-y-2 pt-2">
         <a
           href={item.itemUrl}
           className="btn-2nd "
@@ -57,6 +59,11 @@ export const ItemCard = ({
               : `See item at ${item.vendor}`}
           </span>
         </a>
+        <ClaimButton
+          id={item.id}
+          isClaimed={item.isClaimed}
+          claimable={item.isClaimable}
+        />
       </span>
     </div>
   );

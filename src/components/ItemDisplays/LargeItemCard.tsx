@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ItemPick } from "./ItemCard";
 import clsx from "clsx";
 import currency from "currency.js";
+import { ClaimButton } from "./ClaimButton";
 
 export const LargeItemCard = ({
   item,
@@ -32,10 +33,10 @@ export const LargeItemCard = ({
         </p>{" "}
       </div>
       <p className="mt-1 text-sm italic text-gray-600">{item.description}</p>
-      <span className="mt-auto flex flex-col justify-evenly  pt-2 md:flex-row">
+      <span className="mt-auto flex flex-col justify-evenly  gap-y-2 pt-2 md:flex-row md:gap-x-2 ">
         <a
           href={item.itemUrl}
-          className="btn-2nd md:w-1/2"
+          className="btn-2nd w-full md:w-1/2 "
           target={"_blank"}
           rel="noreferrer"
         >
@@ -45,6 +46,13 @@ export const LargeItemCard = ({
               : `See item at ${item.vendor}`}
           </span>
         </a>
+
+        <ClaimButton
+          className="w-full md:w-1/2"
+          id={item.id}
+          isClaimed={item.isClaimed}
+          claimable={item.isClaimable}
+        />
       </span>
     </div>
   );

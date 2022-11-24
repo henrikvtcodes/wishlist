@@ -4,6 +4,7 @@ import { z } from "zod";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 import { requestRevalidate } from "server/common/makeRevalidateRequest";
 import currency from "currency.js";
+import { TRPCError } from "@trpc/server";
 
 const prismaItemSelect = Prisma.validator<Prisma.ItemSelect>()({
   id: true,
@@ -68,7 +69,7 @@ export const itemsRouter = router({
             },
           ],
           take: 2,
-          select: { ...prismaItemSelect, type: true },
+          select: { ...prismaItemSelect, type: true, isClaimable: true },
         }),
         ctx.prisma.item.findMany({
           where: {
@@ -81,7 +82,7 @@ export const itemsRouter = router({
             },
           ],
           take: 3,
-          select: { ...prismaItemSelect, type: true },
+          select: { ...prismaItemSelect, type: true, isClaimable: true },
         }),
         ctx.prisma.item.findMany({
           where: {
@@ -94,7 +95,7 @@ export const itemsRouter = router({
             },
           ],
           take: 3,
-          select: { ...prismaItemSelect, type: true },
+          select: { ...prismaItemSelect, type: true, isClaimable: true },
         }),
       ]);
 
