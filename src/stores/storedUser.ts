@@ -14,10 +14,15 @@ interface StoredUserActions {
 
 export const useStoredUser = create<StoredUserData & StoredUserActions>()(
   devtools(
-    persist((set) => ({
-      user: null,
+    persist(
+      (set) => ({
+        user: null,
 
-      setUser: (user) => set({ user }),
-    }))
+        setUser: (user) => set({ user }),
+      }),
+      {
+        name: "storedUser",
+      }
+    )
   )
 );

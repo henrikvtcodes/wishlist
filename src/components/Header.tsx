@@ -64,8 +64,11 @@ export const Header = () => {
               <HeaderBarLink title="Clothing" href="/clothing" />
             </nav>
             <div className="flex items-center md:ml-12">
-              <span className="text-base font-medium text-gray-500 hover:text-gray-900">
-                {userName ? `Hi ${userName}` : "Hi there"}
+              <span className="text-base font-medium text-gray-600 ">
+                Hi
+                <span className="font-semibold">
+                  {userName ? ` ${userName}` : " there"}
+                </span>
               </span>
             </div>
           </div>

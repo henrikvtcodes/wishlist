@@ -2,22 +2,21 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { useStoredUser } from "stores/storedUser";
-import { trpcClient } from "utils/trpc";
+import { trpc } from "utils/trpc";
 
 export const UserWatcher = () => {
   const router = useRouter();
-  const storedUserState = useStoredUser();
+  const setUser = useStoredUser((state) => state.setUser);
+
+  const { data } = trpc.refs.getRef.useQuery({
+    ref: String(router.query.userRef),
+  });
 
   useEffect(() => {
-    const userRef = router.query.userRef;
-    if (typeof userRef === "string") {
-      trpcClient.refs.getRef.query({ ref: userRef }).then((data) => {
-        if (data) {
-          storedUserState.setUser({ name: data.name, id: data.id });
-        }
-      });
+    if (data !== undefined && data !== null) {
+      setUser({ name: data.name, id: data.id });
     }
-  });
+  }, [data, setUser]);
 
   return <></>;
 };
