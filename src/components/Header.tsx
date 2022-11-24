@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useStoredUser } from "stores/storedUser";
+import dynamic from "next/dynamic";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -30,8 +30,14 @@ const HeaderBarLink = ({ title, href }: { title: string; href: string }) => {
   );
 };
 
+const HeaderBarUser = dynamic(
+  () => import("components/HeaderBarUser").then((value) => value.HeaderBarUser),
+  {
+    ssr: true,
+  }
+);
+
 export const Header = () => {
-  const userName = useStoredUser((state) => state.user?.name);
   return (
     <Popover className="relative bg-white">
       <div
@@ -64,12 +70,7 @@ export const Header = () => {
               <HeaderBarLink title="Clothing" href="/clothing" />
             </nav>
             <div className="flex items-center md:ml-12">
-              <span className="text-base font-medium text-gray-600 ">
-                Hi
-                <span className="font-semibold">
-                  {userName ? ` ${userName}` : " there"}
-                </span>
-              </span>
+              <HeaderBarUser />
             </div>
           </div>
         </div>

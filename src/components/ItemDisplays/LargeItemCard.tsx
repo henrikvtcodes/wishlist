@@ -2,8 +2,17 @@ import Image from "next/image";
 import type { ItemPick } from "./ItemCard";
 import clsx from "clsx";
 import currency from "currency.js";
-import { ClaimButton } from "./ClaimButton";
+import dynamic from "next/dynamic";
 
+const ClaimButton = dynamic(
+  () =>
+    import("components/ItemDisplays/ClaimButton").then(
+      (value) => value.ClaimButton
+    ),
+  {
+    ssr: true,
+  }
+);
 export const LargeItemCard = ({
   item,
   sizingOverride = false,

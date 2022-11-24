@@ -1,8 +1,18 @@
 import clsx from "clsx";
 import currency from "currency.js";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import type { Item } from "server/db/generated";
-import { ClaimButton } from "./ClaimButton";
+
+const ClaimButton = dynamic(
+  () =>
+    import("components/ItemDisplays/ClaimButton").then(
+      (value) => value.ClaimButton
+    ),
+  {
+    ssr: true,
+  }
+);
 
 export type ItemPick = Pick<
   Item,
