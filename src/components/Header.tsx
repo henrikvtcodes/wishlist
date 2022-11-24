@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useStoredUser } from "stores/storedUser";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -30,6 +31,7 @@ const HeaderBarLink = ({ title, href }: { title: string; href: string }) => {
 };
 
 export const Header = () => {
+  const userName = useStoredUser((state) => state.user?.name);
   return (
     <Popover className="relative bg-white">
       <div
@@ -63,7 +65,7 @@ export const Header = () => {
             </nav>
             <div className="flex items-center md:ml-12">
               <span className="text-base font-medium text-gray-500 hover:text-gray-900">
-                User not found
+                {userName ? `Hi ${userName}` : "Hi there"}
               </span>
             </div>
           </div>
