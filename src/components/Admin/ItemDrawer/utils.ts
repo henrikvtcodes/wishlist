@@ -19,5 +19,6 @@ export const itemData: (
         : currency(item.priceCents, { fromCents: true }).intValue,
     isClaimed: item.isClaimed,
     vendor: watch("vendor") ?? item.vendor,
+    isClaimable: watch("isClaimable") ?? item.isClaimable,
   };
 };
