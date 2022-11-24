@@ -179,12 +179,37 @@ export const itemsRouter = router({
   claim: publicProcedure
     .input(z.object({ id: z.string().cuid(), refId: z.string().cuid() }))
     .mutation(async ({ ctx, input }) => {
+      const item = await ctx.prisma.item.findFirst({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (!item) {
+        throw new TRPCError({ message: "Item not found", code: "NOT_FOUND" });
+      }
+
+      if (!item.isClaimable) {
+        throw new TRPCError({
+          message: "Item is not claimable",
+          code: "BAD_REQUEST",
+        });
+      }
+
+      if (item.isClaimed) {
+        throw new TRPCError({
+          message: "Item already claimed",
+          code: "BAD_REQUEST",
+        });
+      }
+
       await ctx.prisma.item.update({
         where: {
           id: input.id,
         },
         data: {
           isClaimed: true,
+          claimedAt: new Date(),
           claimer: {
             connect: {
               id: input.refId,
