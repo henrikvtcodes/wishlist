@@ -6,7 +6,7 @@ export const refsRouter = router({
   getRef: publicProcedure
     .input(z.object({ ref: z.string() }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.referrers.findUniqueOrThrow({
+      return ctx.prisma.referrers.findFirst({
         where: {
           ref: input.ref,
         },

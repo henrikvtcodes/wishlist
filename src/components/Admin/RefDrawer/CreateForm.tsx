@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 
 import { FormErrors } from "./FormErrors";
@@ -16,6 +15,7 @@ export const CreateForm = () => {
     formState: { errors },
     setError,
     clearErrors,
+    watch,
   } = useForm<CreateRefType>({
     resolver: zodResolver(createRefSchema),
     mode: "onChange",
@@ -30,19 +30,16 @@ export const CreateForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [value, setValue] = useState<string>("");
+  const debouncedRef = useDebounce<string>(watch("ref"), 500);
 
-  const debouncedRef = useDebounce<string>(value, 500);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
+  const [refExistsEnabled, setRefExistsEnabled] = useState(false);
 
   const { data: refExists, refetch } = trpc.refs.refExists.useQuery(
     {
       ref: debouncedRef,
     },
     {
+      enabled: refExistsEnabled,
       onSuccess: (refExists) => {
         if (refExists) {
           setError("ref", {
@@ -65,7 +62,12 @@ export const CreateForm = () => {
   });
 
   useEffect(() => {
-    refetch();
+    if (typeof debouncedRef === "string") {
+      setRefExistsEnabled(true);
+      refetch();
+    } else {
+      setRefExistsEnabled(false);
+    }
   }, [debouncedRef, refetch]);
 
   return (
@@ -98,8 +100,6 @@ export const CreateForm = () => {
           <input
             type={"text"}
             {...register("ref")}
-            value={value}
-            onChange={handleChange}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
             placeholder="Ref"
           />
