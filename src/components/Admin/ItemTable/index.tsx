@@ -50,12 +50,6 @@ export const ItemTable = () => {
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Description
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
                       Price
                     </th>
                     <th
@@ -81,6 +75,20 @@ export const ItemTable = () => {
 
                     <th
                       scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Is Claimable
+                    </th>
+
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Claimed
+                    </th>
+
+                    <th
+                      scope="col"
                       className="relative py-3.5 pl-3 pr-4 sm:pr-6"
                     >
                       <span className="sr-only">Edit</span>
@@ -96,24 +104,30 @@ export const ItemTable = () => {
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         {item.name}
                       </td>
-                      <td className=" w-20 overflow-hidden text-ellipsis whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        <span className="font-medium text-blue-500 underline decoration-dotted underline-offset-2">
-                          View
-                        </span>
-                        {/* <aside className=""></aside> */}
-                      </td>
+
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         <span className="font-semibold">$</span>
                         {currency(item.priceCents, { fromCents: true }).value}
                       </td>
+
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {item.vendor}
                       </td>
+
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {item.category}
                       </td>
+
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {item.type}
+                      </td>
+
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {item.isClaimable ? "Yes" : "No"}
+                      </td>
+
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {item.isClaimed ? "Yes" : "No"}
                       </td>
 
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
