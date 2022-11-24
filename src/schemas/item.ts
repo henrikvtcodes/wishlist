@@ -14,6 +14,7 @@ export const createItemSchema = z.object({
   vendor: z.nativeEnum(ItemVendor),
   category: z.nativeEnum(ItemCategory),
   type: z.nativeEnum(ItemType),
+  isClaimable: z.preprocess((isClaimable) => Boolean(isClaimable), z.boolean()),
 });
 
 export type CreateItemType = z.infer<typeof createItemSchema>;

@@ -109,7 +109,12 @@ export const itemsRouter = router({
         where: {
           id: input.id,
         },
-        select: { ...prismaItemSelect, type: true, category: true },
+        select: {
+          ...prismaItemSelect,
+          type: true,
+          category: true,
+          isClaimable: true,
+        },
       });
 
       return item;

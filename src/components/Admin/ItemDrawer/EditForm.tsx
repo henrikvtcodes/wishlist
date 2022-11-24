@@ -19,7 +19,7 @@ export const EditForm = ({
   item,
 }: {
   id: string;
-  item: ItemPick & Pick<Item, "category" | "type">;
+  item: ItemPick & Pick<Item, "category" | "type" | "isClaimable">;
 }) => {
   const {
     register,
@@ -38,6 +38,7 @@ export const EditForm = ({
       vendor: item.vendor,
       category: item.category,
       type: item.type,
+      isClaimable: item.isClaimable,
     },
     shouldUseNativeValidation: true,
   });
@@ -204,6 +205,22 @@ export const EditForm = ({
             <option value={ItemType.SMALL}>Small {"($0-$50)"}</option>
             <option value={ItemType.MEDIUM}>Medium {"($51-$100)"}</option>
             <option value={ItemType.LARGE}>Large {"($101-$150+)"}</option>
+          </select>
+        </div>
+
+        <div>
+          <label
+            htmlFor="vendor"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Claimable
+          </label>
+          <select
+            {...register("isClaimable")}
+            className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+          >
+            <option value={"true"}>Yes</option>
+            <option value={"false"}>No</option>
           </select>
         </div>
 

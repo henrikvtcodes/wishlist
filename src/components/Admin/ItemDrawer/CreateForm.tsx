@@ -35,6 +35,8 @@ export const CreateForm = () => {
     setIsLoading(false);
   });
 
+  console.log({ errors });
+
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-y-4">
       <div>
@@ -181,6 +183,22 @@ export const CreateForm = () => {
           <option value={ItemVendor.HomeDepot}>HomeDepot</option>
           <option value={ItemVendor.Lego}>Lego</option>
           <option value={ItemVendor.Other}>Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label
+          htmlFor="vendor"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Claimable
+        </label>
+        <select
+          {...register("isClaimable")}
+          className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        >
+          <option value={"true"}>Yes</option>
+          <option value={"false"}>No</option>
         </select>
       </div>
 
