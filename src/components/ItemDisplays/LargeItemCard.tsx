@@ -23,18 +23,16 @@ export const LargeItemCard = ({
   return (
     <div
       className={clsx(
-        "flex w-full flex-col rounded-lg bg-gray-200 p-4",
+        "relative flex w-full flex-col rounded-lg bg-gray-200 p-4",
         sizingOverride ? "w-full" : "sm:w-1/2 sm:self-stretch lg:w-5/12"
       )}
     >
-      <div className=" relative h-80 w-full overflow-hidden rounded-t-lg">
-        <Image
-          src={item.imgUrl}
-          alt={`Image of ${item.name}`}
-          className="object-contain"
-          fill
-        />
-      </div>
+      <Image
+        src={item.imgUrl}
+        alt={`Image of ${item.name}`}
+        className="!relative rounded-md" // Override weird next/image styles
+        fill
+      />
       <div className="mt-4 flex flex-col text-base font-medium text-gray-900">
         <h3>{item.name}</h3>
         <p className="my-1 w-min rounded bg-blue-200 p-1">

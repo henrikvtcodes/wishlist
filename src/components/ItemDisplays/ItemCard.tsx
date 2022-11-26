@@ -37,26 +37,24 @@ export const ItemCard = ({
   return (
     <div
       className={clsx(
-        "flex h-fit w-full flex-col rounded-lg bg-gray-200 p-4 ",
+        "relative flex w-full flex-col rounded-lg bg-gray-200 p-4",
         sizingOverride ? "w-full" : "sm:w-1/3"
       )}
     >
-      <div className=" relative h-80 w-full overflow-hidden rounded-t-lg">
-        <Image
-          src={item.imgUrl}
-          alt={`Image of ${item.name}`}
-          className="object-contain"
-          fill
-        />
-      </div>
-      <div className="mt-4 flex flex-col text-base font-medium text-gray-900">
+      <Image
+        src={item.imgUrl}
+        alt={`Image of ${item.name}`}
+        className="!relative rounded-md" // Override weird next/image styles
+        fill
+      />
+      <div className=" mt-4 flex flex-col text-base font-medium text-gray-900">
         <h3>{item.name}</h3>
         <p className="my-1 w-min rounded bg-blue-200 p-1">
           {currency(item.priceCents, { fromCents: true }).format()}
         </p>
       </div>
-      <p className="mt-1 text-sm italic text-gray-600">{item.description}</p>
-      <span className="mt-auto flex flex-col justify-evenly gap-y-2 pt-2">
+      <p className=" mt-1 text-sm italic text-gray-600">{item.description}</p>
+      <span className=" mt-auto flex flex-col justify-evenly gap-y-2 pt-2">
         <a
           href={item.itemUrl}
           className="btn-2nd "
