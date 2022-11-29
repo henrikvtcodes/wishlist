@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Item } from "server/db/generated";
+import { ItemVendor } from "server/db/generated";
 import { ItemCategory, ItemType } from "server/db/generated";
 import currency from "currency.js";
 
@@ -13,6 +14,7 @@ import { ItemCard } from "components/ItemDisplays/ItemCard";
 import { FormErrors } from "./FormErrors";
 import { itemData } from "./utils";
 import { useState } from "react";
+import { vendorToTitleMap } from "utils/constants";
 
 export const EditForm = ({
   id,
@@ -184,10 +186,11 @@ export const EditForm = ({
             {...register("category")}
             className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
           >
-            <option value={ItemCategory.tech}>Technology & Electronics</option>
-            <option value={ItemCategory.tools}>Tools</option>
-            <option value={ItemCategory.clothing}>Clothing</option>
-            <option value={ItemCategory.legos}>Lego</option>
+            {Object.values(ItemCategory).map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -211,6 +214,25 @@ export const EditForm = ({
         <div>
           <label
             htmlFor="vendor"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Vendor
+          </label>
+          <select
+            {...register("vendor")}
+            className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+          >
+            {Object.values(ItemVendor).map((vendor) => (
+              <option key={vendor} value={vendor}>
+                {vendorToTitleMap[vendor]}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label
+            htmlFor="isClaimable"
             className="block text-sm font-medium text-gray-700"
           >
             Claimable

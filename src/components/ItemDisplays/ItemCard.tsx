@@ -3,6 +3,7 @@ import currency from "currency.js";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import type { Item } from "server/db/generated";
+import { vendorToTitleMap } from "utils/constants";
 
 const ClaimButton = dynamic(
   () =>
@@ -64,7 +65,7 @@ export const ItemCard = ({
           <span className="mx-auto">
             {item.vendor === "Other"
               ? "Go to item"
-              : `See item at ${item.vendor}`}
+              : `See item at ${vendorToTitleMap[item.vendor]}`}
           </span>
         </a>
         <ClaimButton

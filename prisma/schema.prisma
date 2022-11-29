@@ -74,6 +74,7 @@ enum ItemVendor {
   HomeDepot
   Lego
   BHPhoto
+  HarborFreight
   Other
 }
 

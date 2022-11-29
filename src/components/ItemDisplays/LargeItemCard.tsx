@@ -4,6 +4,8 @@ import clsx from "clsx";
 import currency from "currency.js";
 import dynamic from "next/dynamic";
 
+import { vendorToTitleMap } from "utils/constants";
+
 const ClaimButton = dynamic(
   () =>
     import("components/ItemDisplays/ClaimButton").then(
@@ -50,7 +52,7 @@ export const LargeItemCard = ({
           <span className="mx-auto">
             {item.vendor === "Other"
               ? "Go to item"
-              : `See item at ${item.vendor}`}
+              : `See item at ${vendorToTitleMap[item.vendor]}`}
           </span>
         </a>
 
