@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
 
       return env.NODE_ENV === "production"
         ? user.email === env.ADMIN_EMAIL
-        : false;
+        : true;
     },
   },
   // Configure one or more authentication providers
