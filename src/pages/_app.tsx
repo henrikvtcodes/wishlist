@@ -24,7 +24,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <PlausibleProvider
           domain="wishlist.henriktech.com"
           trackOutboundLinks
-          exclude="/admin/*"
+          exclude="/admin**"
         >
           <DefaultSeo {...SEO} />
           <Component {...pageProps} />
