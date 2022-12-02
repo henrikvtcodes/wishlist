@@ -1,6 +1,7 @@
 import { trpc } from "utils/trpc";
 import clsx from "clsx";
 import { useRefDrawer } from "stores/refDrawer";
+import { UrlCopyBox } from "./UrlCopyBox";
 
 export const RefTable = () => {
   const { data: refs, isFetching } = trpc.refs.all.useQuery();
@@ -49,7 +50,13 @@ export const RefTable = () => {
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Referrer
+                      Code
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Copy
                     </th>
                     <th
                       scope="col"
@@ -72,11 +79,8 @@ export const RefTable = () => {
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         {ref.ref}
                       </td>
-                      <td className=" w-20 overflow-hidden text-ellipsis whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        <span className="font-medium text-blue-500 underline decoration-dotted underline-offset-2">
-                          View
-                        </span>
-                        {/* <aside className=""></aside> */}
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <UrlCopyBox userRef={ref.ref} />
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <button
