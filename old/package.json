@@ -2,6 +2,7 @@
   "name": "wishlist",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@8.8.0",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -63,5 +64,8 @@
   },
   "ct3aMetadata": {
     "initVersion": "6.10.1"
+  },
+  "engines": {
+    "node": ">=18.8.0"
   }
 }
