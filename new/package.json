@@ -11,7 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@lucia-auth/oauth": "^3.3.1",
+    "@auth/drizzle-adapter": "^0.3.2",
     "@planetscale/database": "^1.11.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@t3-oss/env-nextjs": "^0.7.0",
@@ -23,8 +23,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "drizzle-orm": "^0.28.5",
-    "lucia": "^2.7.2",
     "next": "^13.5.4",
+    "next-auth": "^4.23.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "^1.13.1",
