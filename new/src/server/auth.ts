@@ -4,11 +4,11 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
 
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
-import { pgTable } from "~/server/db/schema";
+import { pgTable } from "./db/schema";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -45,12 +45,21 @@ export const authOptions: NextAuthOptions = {
         id: user.id,
       },
     }),
+
+    signIn({ user }) {
+      console.log({ email: user.email, adminEmail: env.ADMIN_EMAIL });
+
+      return env.NODE_ENV === "production"
+        ? user.email === env.ADMIN_EMAIL
+        : true;
+    },
   },
+
   adapter: DrizzleAdapter(db, pgTable),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
     /**
      * ...add more providers here.
@@ -62,6 +71,10 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+
+  // pages: {
+  //   signIn: "/admin",
+  // },
 };
 
 /**

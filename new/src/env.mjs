@@ -14,6 +14,7 @@ export const env = createEnv({
         (str) => !str.includes("YOUR_MYSQL_URL_HERE"),
         "You forgot to change the default URL",
       ),
+    MIGRATE_DB: z.coerce.boolean().default(false),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -50,6 +51,7 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     REVALIDATE_AUTH_TOKEN: process.env.REVALIDATE_AUTH_TOKEN,
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+    MIGRATE_DB: process.env.MIGRATE_DB,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

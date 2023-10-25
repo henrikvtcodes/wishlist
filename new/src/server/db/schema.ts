@@ -8,6 +8,7 @@ import {
   index,
   boolean,
   varchar,
+  primaryKey,
 } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 import { type AdapterAccount } from "next-auth/adapters";
@@ -30,85 +31,54 @@ export const itemVendor = pgEnum("ItemVendor", [
 
 export const pgTable = pgTableCreator((name) => `${name}`);
 
-export const verificationToken = pgTable(
-  "VerificationToken",
-  {
-    identifier: varchar("identifier", { length: 255 }).notNull(),
-    token: varchar("token", { length: 255 }).notNull(),
-    expires: timestamp("expires", { mode: "date" }).notNull(),
-  },
-  (table) => {
-    return {
-      tokenKey: uniqueIndex("VerificationToken_token_key").on(table.token),
-      identifierTokenKey: uniqueIndex(
-        "VerificationToken_identifier_token_key",
-      ).on(table.identifier, table.token),
-    };
-  },
-);
-
-export const users = pgTable(
-  "User",
-  {
-    id: varchar("id", { length: 255 }).notNull().primaryKey(),
-    name: varchar("name", { length: 255 }),
-    email: varchar("email", { length: 255 }).notNull(),
-    emailVerified: timestamp("emailVerified", { precision: 3, mode: "date" }),
-    image: varchar("image", { length: 255 }),
-  },
-  (table) => {
-    return {
-      emailKey: uniqueIndex("User_email_key").on(table.email),
-    };
-  },
-);
+export const users = pgTable("user", {
+  id: text("id").notNull().primaryKey(),
+  name: text("name"),
+  email: text("email").notNull(),
+  emailVerified: timestamp("emailVerified", { mode: "date" }),
+  image: text("image"),
+});
 
 export const accounts = pgTable(
-  "Account",
+  "account",
   {
-    id: text("id").primaryKey().notNull(),
     userId: text("userId")
       .notNull()
-      .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
-    type: varchar("type", { length: 255 })
-      .$type<AdapterAccount["type"]>()
-      .notNull(),
+      .references(() => users.id, { onDelete: "cascade" }),
+    type: text("type").$type<AdapterAccount["type"]>().notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),
-    refreshToken: text("refresh_token"),
-    accessToken: text("access_token"),
-    expiresAt: integer("expires_at"),
-    tokenType: text("token_type"),
+    refresh_token: text("refresh_token"),
+    access_token: text("access_token"),
+    expires_at: integer("expires_at"),
+    token_type: text("token_type"),
     scope: text("scope"),
-    idToken: text("id_token"),
-    sessionState: text("session_state"),
+    id_token: text("id_token"),
+    session_state: text("session_state"),
   },
-  (table) => {
-    return {
-      providerProviderAccountIdKey: uniqueIndex(
-        "Account_provider_providerAccountId_key",
-      ).on(table.provider, table.providerAccountId),
-    };
-  },
+  (account) => ({
+    compoundKey: primaryKey(account.provider, account.providerAccountId),
+  }),
 );
 
-export const session = pgTable(
-  "Session",
+export const sessions = pgTable("session", {
+  sessionToken: text("sessionToken").notNull().primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  expires: timestamp("expires", { mode: "date" }).notNull(),
+});
+
+export const verificationTokens = pgTable(
+  "verificationToken",
   {
-    id: text("id").primaryKey().notNull(),
-    sessionToken: text("sessionToken").notNull(),
-    userId: text("userId")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
-    expires: timestamp("expires", { precision: 3, mode: "date" }).notNull(),
+    identifier: text("identifier").notNull(),
+    token: text("token").notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull(),
   },
-  (table) => {
-    return {
-      sessionTokenKey: uniqueIndex("Session_sessionToken_key").on(
-        table.sessionToken,
-      ),
-    };
-  },
+  (vt) => ({
+    compoundKey: primaryKey(vt.identifier, vt.token),
+  }),
 );
 
 export const referrers = pgTable(
