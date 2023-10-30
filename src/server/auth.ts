@@ -72,9 +72,9 @@ export const authOptions: NextAuthOptions = {
      */
   ],
 
-  // pages: {
-  //   signIn: "/admin",
-  // },
+  pages: {
+    signIn: "/admin",
+  },
 };
 
 /**
