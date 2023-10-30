@@ -1,0 +1,56 @@
+{
+  // Place your teambot workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  "Layout": {
+    "scope": "typescriptreact",
+    "prefix": "lo",
+    "body": [
+      "import { type ReactNode } from \"react\";\r",
+      "\r",
+      "type Props = {\r",
+      "  children: ReactNode;\r",
+      "}\r",
+      "\r",
+      "export default function Layout({ children }: Props) {\r",
+      "  return <>{children}</>;\r",
+      "}"
+    ],
+    "description": "Next.js App Dir Layout"
+  },
+  "Layout With Params": {
+    "scope": "typescriptreact",
+    "prefix": "lo-params",
+    "body": [
+      "import { type ReactNode } from \"react\";\r",
+      "\r",
+      "type Props = {\r",
+      "  children: ReactNode;\r",
+      "  params: {\r",
+      "    team: string;\r",
+      "  }\r",
+      "}\r",
+      "\r",
+      "export default function Layout({ children, params }: Props) {\r",
+      "  return <>{children}</>;\r",
+      "}"
+    ],
+    "description": "Next.js App Dir Layout with Params"
+  },
+  "Page": {
+    "prefix": "pg",
+    "body": [
+      "\"use client\";\r",
+      "\r",
+      "export default function Page() {\r",
+      "  return <>Hello</>;\r",
+      "}\r",
+      ""
+    ],
+    "description": "Next.js App Dir Page"
+  }
+}
