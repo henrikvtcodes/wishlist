@@ -7,10 +7,8 @@ import {
   uniqueIndex,
   index,
   boolean,
-  varchar,
   primaryKey,
 } from "drizzle-orm/pg-core";
-import { relations, sql } from "drizzle-orm";
 import { type AdapterAccount } from "next-auth/adapters";
 
 export const itemCategory = pgEnum("ItemCategory", [
@@ -19,6 +17,7 @@ export const itemCategory = pgEnum("ItemCategory", [
   "clothing",
   "tech",
 ]);
+
 export const itemType = pgEnum("ItemType", ["high", "medium", "base"]);
 export const itemVendor = pgEnum("ItemVendor", [
   "Other",
@@ -29,7 +28,7 @@ export const itemVendor = pgEnum("ItemVendor", [
   "Amazon",
 ]);
 
-export const pgTable = pgTableCreator((name) => `${name}`);
+export const pgTable = pgTableCreator((name) => `wishlist_${name}`);
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),

@@ -9,5 +9,5 @@ export default {
   dbCredentials: {
     connectionString: env.DATABASE_URL,
   },
-  tablesFilter: ["*"],
+  tablesFilter: ["wishlist_*"],
 } satisfies Config;

@@ -16,7 +16,7 @@ EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "account" (
+CREATE TABLE IF NOT EXISTS "wishlist_account" (
 	"userId" text NOT NULL,
 	"type" text NOT NULL,
 	"provider" text NOT NULL,
@@ -28,10 +28,10 @@ CREATE TABLE IF NOT EXISTS "account" (
 	"scope" text,
 	"id_token" text,
 	"session_state" text,
-	CONSTRAINT account_provider_providerAccountId PRIMARY KEY("provider","providerAccountId")
+	CONSTRAINT wishlist_account_provider_providerAccountId PRIMARY KEY("provider","providerAccountId")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "Item" (
+CREATE TABLE IF NOT EXISTS "wishlist_Item" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"description" text NOT NULL,
@@ -48,19 +48,19 @@ CREATE TABLE IF NOT EXISTS "Item" (
 	"claimerId" text
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "Referrers" (
+CREATE TABLE IF NOT EXISTS "wishlist_Referrers" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"ref" text NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "session" (
+CREATE TABLE IF NOT EXISTS "wishlist_session" (
 	"sessionToken" text PRIMARY KEY NOT NULL,
 	"userId" text NOT NULL,
 	"expires" timestamp NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "user" (
+CREATE TABLE IF NOT EXISTS "wishlist_user" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" text,
 	"email" text NOT NULL,
@@ -68,29 +68,29 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"image" text
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "verificationToken" (
+CREATE TABLE IF NOT EXISTS "wishlist_verificationToken" (
 	"identifier" text NOT NULL,
 	"token" text NOT NULL,
 	"expires" timestamp NOT NULL,
-	CONSTRAINT verificationToken_identifier_token PRIMARY KEY("identifier","token")
+	CONSTRAINT wishlist_verificationToken_identifier_token PRIMARY KEY("identifier","token")
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX IF NOT EXISTS "Referrers_ref_key" ON "Referrers" ("ref");--> statement-breakpoint
-CREATE INDEX IF NOT EXISTS "Referrers_ref_idx" ON "Referrers" ("ref");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "Referrers_ref_key" ON "wishlist_Referrers" ("ref");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "Referrers_ref_idx" ON "wishlist_Referrers" ("ref");--> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "account" ADD CONSTRAINT "account_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "wishlist_account" ADD CONSTRAINT "wishlist_account_userId_wishlist_user_id_fk" FOREIGN KEY ("userId") REFERENCES "wishlist_user"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "Item" ADD CONSTRAINT "Item_claimerId_Referrers_id_fk" FOREIGN KEY ("claimerId") REFERENCES "Referrers"("id") ON DELETE set null ON UPDATE cascade;
+ ALTER TABLE "wishlist_Item" ADD CONSTRAINT "wishlist_Item_claimerId_wishlist_Referrers_id_fk" FOREIGN KEY ("claimerId") REFERENCES "wishlist_Referrers"("id") ON DELETE set null ON UPDATE cascade;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "session" ADD CONSTRAINT "session_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "wishlist_session" ADD CONSTRAINT "wishlist_session_userId_wishlist_user_id_fk" FOREIGN KEY ("userId") REFERENCES "wishlist_user"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

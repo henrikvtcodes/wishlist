@@ -1,11 +1,11 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "5ffe7820-1606-4f34-ac1c-3349b480fbc6",
+  "id": "4f4cb234-d4f8-4b10-8073-7e1274edaf40",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "account": {
-      "name": "account",
+    "wishlist_account": {
+      "name": "wishlist_account",
       "schema": "",
       "columns": {
         "userId": {
@@ -77,10 +77,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "account_userId_user_id_fk": {
-          "name": "account_userId_user_id_fk",
-          "tableFrom": "account",
-          "tableTo": "user",
+        "wishlist_account_userId_wishlist_user_id_fk": {
+          "name": "wishlist_account_userId_wishlist_user_id_fk",
+          "tableFrom": "wishlist_account",
+          "tableTo": "wishlist_user",
           "columnsFrom": [
             "userId"
           ],
@@ -92,8 +92,8 @@
         }
       },
       "compositePrimaryKeys": {
-        "account_provider_providerAccountId": {
-          "name": "account_provider_providerAccountId",
+        "wishlist_account_provider_providerAccountId": {
+          "name": "wishlist_account_provider_providerAccountId",
           "columns": [
             "provider",
             "providerAccountId"
@@ -102,8 +102,8 @@
       },
       "uniqueConstraints": {}
     },
-    "Item": {
-      "name": "Item",
+    "wishlist_Item": {
+      "name": "wishlist_Item",
       "schema": "",
       "columns": {
         "id": {
@@ -195,10 +195,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "Item_claimerId_Referrers_id_fk": {
-          "name": "Item_claimerId_Referrers_id_fk",
-          "tableFrom": "Item",
-          "tableTo": "Referrers",
+        "wishlist_Item_claimerId_wishlist_Referrers_id_fk": {
+          "name": "wishlist_Item_claimerId_wishlist_Referrers_id_fk",
+          "tableFrom": "wishlist_Item",
+          "tableTo": "wishlist_Referrers",
           "columnsFrom": [
             "claimerId"
           ],
@@ -212,8 +212,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "Referrers": {
-      "name": "Referrers",
+    "wishlist_Referrers": {
+      "name": "wishlist_Referrers",
       "schema": "",
       "columns": {
         "id": {
@@ -255,8 +255,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "session": {
-      "name": "session",
+    "wishlist_session": {
+      "name": "wishlist_session",
       "schema": "",
       "columns": {
         "sessionToken": {
@@ -280,10 +280,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "session_userId_user_id_fk": {
-          "name": "session_userId_user_id_fk",
-          "tableFrom": "session",
-          "tableTo": "user",
+        "wishlist_session_userId_wishlist_user_id_fk": {
+          "name": "wishlist_session_userId_wishlist_user_id_fk",
+          "tableFrom": "wishlist_session",
+          "tableTo": "wishlist_user",
           "columnsFrom": [
             "userId"
           ],
@@ -297,8 +297,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "user": {
-      "name": "user",
+    "wishlist_user": {
+      "name": "wishlist_user",
       "schema": "",
       "columns": {
         "id": {
@@ -337,8 +337,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "verificationToken": {
-      "name": "verificationToken",
+    "wishlist_verificationToken": {
+      "name": "wishlist_verificationToken",
       "schema": "",
       "columns": {
         "identifier": {
@@ -363,8 +363,8 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "verificationToken_identifier_token": {
-          "name": "verificationToken_identifier_token",
+        "wishlist_verificationToken_identifier_token": {
+          "name": "wishlist_verificationToken_identifier_token",
           "columns": [
             "identifier",
             "token"

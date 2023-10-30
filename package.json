@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "db:push": "dotenv drizzle-kit push:mysql",
+    "db:push": "dotenv drizzle-kit push:pg",
     "db:gen": "dotenv drizzle-kit generate:pg",
     "db:studio": "dotenv drizzle-kit studio",
     "db:migrate": "dotenv node migrate.mjs",
@@ -32,6 +32,7 @@
     "@trpc/server": "^10.37.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "currency.js": "^2.0.4",
     "drizzle-orm": "^0.28.5",
     "lucide-react": "^0.288.0",
     "next": "^13.5.4",
@@ -67,5 +68,5 @@
   "ct3aMetadata": {
     "initVersion": "7.22.0"
   },
-  "packageManager": "pnpm@8.8.0"
+  "packageManager": "pnpm@8.9.2"
 }
