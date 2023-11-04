@@ -1,9 +1,9 @@
 import { revalidatePath } from "next/cache";
+
 import "server-only";
-import type { itemCategory } from "~/server/db/schema";
 
-type Page = (typeof itemCategory)["enumValues"][number];
+import type { ItemCategory } from "~/server/db/schema";
 
-export function requestRevalidate(page: Page) {
+export function requestRevalidate(page: ItemCategory) {
   revalidatePath(`/${page}`, "page");
 }

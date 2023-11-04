@@ -12,6 +12,10 @@ if (env.MIGRATE_DB || env.NODE_ENV === "production") {
 }
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  experimental: {
+    typedRoutes: true,
+  },
+};
 
 export default config;

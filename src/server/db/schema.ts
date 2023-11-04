@@ -10,6 +10,7 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
+
 import { cuid } from "~/cuid";
 
 export const itemCategory = pgEnum("ItemCategory", [
@@ -18,6 +19,8 @@ export const itemCategory = pgEnum("ItemCategory", [
   "clothing",
   "tech",
 ]);
+
+export type ItemCategory = (typeof itemCategory)["enumValues"][number];
 
 export const itemType = pgEnum("ItemType", ["high", "medium", "base"]);
 export const itemVendor = pgEnum("ItemVendor", [
