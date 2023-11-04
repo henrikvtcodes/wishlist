@@ -10,7 +10,6 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
-
 import { cuid } from "~/cuid";
 
 export const itemCategory = pgEnum("ItemCategory", [
@@ -23,6 +22,9 @@ export const itemCategory = pgEnum("ItemCategory", [
 export type ItemCategory = (typeof itemCategory)["enumValues"][number];
 
 export const itemType = pgEnum("ItemType", ["high", "medium", "base"]);
+
+export type ItemType = (typeof itemType)["enumValues"][number];
+
 export const itemVendor = pgEnum("ItemVendor", [
   "Other",
   "HarborFreight",
@@ -31,6 +33,8 @@ export const itemVendor = pgEnum("ItemVendor", [
   "HomeDepot",
   "Amazon",
 ]);
+
+export type ItemVendor = (typeof itemVendor)["enumValues"][number];
 
 export const pgTable = pgTableCreator((name) => `wishlist_${name}`);
 
