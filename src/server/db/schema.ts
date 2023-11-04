@@ -10,6 +10,7 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
+import { cuid } from "~/cuid";
 
 export const itemCategory = pgEnum("ItemCategory", [
   "legos",
@@ -31,7 +32,7 @@ export const itemVendor = pgEnum("ItemVendor", [
 export const pgTable = pgTableCreator((name) => `wishlist_${name}`);
 
 export const users = pgTable("user", {
-  id: text("id").notNull().primaryKey(),
+  id: text("id").notNull().primaryKey().$defaultFn(cuid),
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
@@ -43,7 +44,8 @@ export const accounts = pgTable(
   {
     userId: text("userId")
       .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" })
+      .$defaultFn(cuid),
     type: text("type").$type<AdapterAccount["type"]>().notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),
@@ -61,7 +63,7 @@ export const accounts = pgTable(
 );
 
 export const sessions = pgTable("session", {
-  sessionToken: text("sessionToken").notNull().primaryKey(),
+  sessionToken: text("sessionToken").notNull().primaryKey().$defaultFn(cuid),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
@@ -71,7 +73,7 @@ export const sessions = pgTable("session", {
 export const verificationTokens = pgTable(
   "verificationToken",
   {
-    identifier: text("identifier").notNull(),
+    identifier: text("identifier").notNull().$defaultFn(cuid),
     token: text("token").notNull(),
     expires: timestamp("expires", { mode: "date" }).notNull(),
   },
@@ -83,7 +85,7 @@ export const verificationTokens = pgTable(
 export const referrers = pgTable(
   "Referrers",
   {
-    id: text("id").primaryKey().notNull(),
+    id: text("id").primaryKey().notNull().$defaultFn(cuid),
     name: text("name").notNull(),
     ref: text("ref").notNull(),
   },
@@ -96,7 +98,7 @@ export const referrers = pgTable(
 );
 
 export const item = pgTable("Item", {
-  id: text("id").primaryKey().notNull(),
+  id: text("id").primaryKey().notNull().$defaultFn(cuid),
   name: text("name").notNull(),
   description: text("description").notNull(),
   imgUrl: text("imgUrl").notNull(),
