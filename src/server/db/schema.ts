@@ -1,4 +1,3 @@
-import { createId as cuid } from "@paralleldrive/cuid2";
 import {
   boolean,
   index,
@@ -32,7 +31,7 @@ export const itemVendor = pgEnum("ItemVendor", [
 export const pgTable = pgTableCreator((name) => `wishlist_${name}`);
 
 export const users = pgTable("user", {
-  id: text("id").notNull().primaryKey().default(cuid()),
+  id: text("id").notNull().primaryKey(),
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
@@ -44,7 +43,6 @@ export const accounts = pgTable(
   {
     userId: text("userId")
       .notNull()
-      .default(cuid())
       .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccount["type"]>().notNull(),
     provider: text("provider").notNull(),
@@ -73,7 +71,7 @@ export const sessions = pgTable("session", {
 export const verificationTokens = pgTable(
   "verificationToken",
   {
-    identifier: text("identifier").notNull().default(cuid()),
+    identifier: text("identifier").notNull(),
     token: text("token").notNull(),
     expires: timestamp("expires", { mode: "date" }).notNull(),
   },
@@ -85,7 +83,7 @@ export const verificationTokens = pgTable(
 export const referrers = pgTable(
   "Referrers",
   {
-    id: text("id").primaryKey().notNull().default(cuid()),
+    id: text("id").primaryKey().notNull(),
     name: text("name").notNull(),
     ref: text("ref").notNull(),
   },
@@ -98,7 +96,7 @@ export const referrers = pgTable(
 );
 
 export const item = pgTable("Item", {
-  id: text("id").primaryKey().notNull().default(cuid()),
+  id: text("id").primaryKey().notNull(),
   name: text("name").notNull(),
   description: text("description").notNull(),
   imgUrl: text("imgUrl").notNull(),
