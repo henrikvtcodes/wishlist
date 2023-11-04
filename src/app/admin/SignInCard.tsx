@@ -1,8 +1,8 @@
 "use client";
 
-import { Card, CardContent, CardTitle, CardHeader } from "~/components/ui/card";
-import { Button } from "~/components/ui/button";
 import { signIn } from "next-auth/react";
+import { Button } from "~/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 export function SignInCard() {
   return (

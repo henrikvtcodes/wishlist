@@ -18,7 +18,8 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "~/cuid": ["./src/lib/cuid"]
     },
     "plugins": [{ "name": "next" }]
   },

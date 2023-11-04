@@ -1,13 +1,14 @@
+import { createId as cuid } from "@paralleldrive/cuid2";
 import {
-  pgTableCreator,
-  pgEnum,
-  timestamp,
-  text,
-  integer,
-  uniqueIndex,
-  index,
   boolean,
+  index,
+  integer,
+  pgEnum,
+  pgTableCreator,
   primaryKey,
+  text,
+  timestamp,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
@@ -31,7 +32,7 @@ export const itemVendor = pgEnum("ItemVendor", [
 export const pgTable = pgTableCreator((name) => `wishlist_${name}`);
 
 export const users = pgTable("user", {
-  id: text("id").notNull().primaryKey(),
+  id: text("id").notNull().primaryKey().default(cuid()),
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
@@ -43,6 +44,7 @@ export const accounts = pgTable(
   {
     userId: text("userId")
       .notNull()
+      .default(cuid())
       .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccount["type"]>().notNull(),
     provider: text("provider").notNull(),
@@ -71,7 +73,7 @@ export const sessions = pgTable("session", {
 export const verificationTokens = pgTable(
   "verificationToken",
   {
-    identifier: text("identifier").notNull(),
+    identifier: text("identifier").notNull().default(cuid()),
     token: text("token").notNull(),
     expires: timestamp("expires", { mode: "date" }).notNull(),
   },
@@ -83,7 +85,7 @@ export const verificationTokens = pgTable(
 export const referrers = pgTable(
   "Referrers",
   {
-    id: text("id").primaryKey().notNull(),
+    id: text("id").primaryKey().notNull().default(cuid()),
     name: text("name").notNull(),
     ref: text("ref").notNull(),
   },
@@ -96,19 +98,19 @@ export const referrers = pgTable(
 );
 
 export const item = pgTable("Item", {
-  id: text("id").primaryKey().notNull(),
+  id: text("id").primaryKey().notNull().default(cuid()),
   name: text("name").notNull(),
   description: text("description").notNull(),
   imgUrl: text("imgUrl").notNull(),
   itemUrl: text("itemUrl").notNull(),
   vendor: itemVendor("vendor").notNull(),
   priceCents: integer("priceCents").notNull(),
-  createdAt: timestamp("createdAt", { precision: 3, mode: "string" }).notNull(),
+  createdAt: timestamp("createdAt", { precision: 3, mode: "date" }).notNull(),
   category: itemCategory("category").notNull(),
   type: itemType("type").notNull(),
   isClaimable: boolean("isClaimable").default(true).notNull(),
   isClaimed: boolean("isClaimed").default(false).notNull(),
-  claimedAt: timestamp("claimedAt", { precision: 3, mode: "string" }),
+  claimedAt: timestamp("claimedAt", { precision: 3, mode: "date" }),
   claimerId: text("claimerId").references(() => referrers.id, {
     onDelete: "set null",
     onUpdate: "cascade",

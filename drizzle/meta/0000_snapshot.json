@@ -81,12 +81,8 @@
           "name": "wishlist_account_userId_wishlist_user_id_fk",
           "tableFrom": "wishlist_account",
           "tableTo": "wishlist_user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -94,10 +90,7 @@
       "compositePrimaryKeys": {
         "wishlist_account_provider_providerAccountId": {
           "name": "wishlist_account_provider_providerAccountId",
-          "columns": [
-            "provider",
-            "providerAccountId"
-          ]
+          "columns": ["provider", "providerAccountId"]
         }
       },
       "uniqueConstraints": {}
@@ -199,12 +192,8 @@
           "name": "wishlist_Item_claimerId_wishlist_Referrers_id_fk",
           "tableFrom": "wishlist_Item",
           "tableTo": "wishlist_Referrers",
-          "columnsFrom": [
-            "claimerId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["claimerId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -238,16 +227,12 @@
       "indexes": {
         "Referrers_ref_key": {
           "name": "Referrers_ref_key",
-          "columns": [
-            "ref"
-          ],
+          "columns": ["ref"],
           "isUnique": true
         },
         "Referrers_ref_idx": {
           "name": "Referrers_ref_idx",
-          "columns": [
-            "ref"
-          ],
+          "columns": ["ref"],
           "isUnique": false
         }
       },
@@ -284,12 +269,8 @@
           "name": "wishlist_session_userId_wishlist_user_id_fk",
           "tableFrom": "wishlist_session",
           "tableTo": "wishlist_user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -365,10 +346,7 @@
       "compositePrimaryKeys": {
         "wishlist_verificationToken_identifier_token": {
           "name": "wishlist_verificationToken_identifier_token",
-          "columns": [
-            "identifier",
-            "token"
-          ]
+          "columns": ["identifier", "token"]
         }
       },
       "uniqueConstraints": {}

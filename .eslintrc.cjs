@@ -31,6 +31,14 @@ const config = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ["src/components/**/*.tsx"],
+      rules: {
+        "@typescript-eslint/no-empty-interface": "warn",
+      },
+    },
+  ],
 };
 
 module.exports = config;
