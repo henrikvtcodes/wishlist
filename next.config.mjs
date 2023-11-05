@@ -16,6 +16,17 @@ const config = {
   experimental: {
     typedRoutes: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.com",
+      },
+      {
+        hostname: "action.msf.ca",
+      },
+    ],
+  },
 };
 
 export default config;

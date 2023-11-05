@@ -1,6 +1,5 @@
 import currency from "currency.js";
 import { z } from "zod";
-
 import { itemCategory, itemType, itemVendor } from "~/server/db/schema";
 
 export const createItemSchema = z.object({
@@ -20,6 +19,11 @@ export const createItemSchema = z.object({
 });
 
 export type CreateItemType = z.infer<typeof createItemSchema>;
+
+export type Item = Omit<CreateItemType, "price"> & {
+  priceCents: number;
+  isClaimed: boolean;
+};
 
 export const updateItemSchema = createItemSchema.partial();
 

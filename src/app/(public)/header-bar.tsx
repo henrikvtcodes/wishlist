@@ -22,6 +22,7 @@ export function HeaderBar() {
             <HeaderBarLink title="Tools" href="/tools" />
             <HeaderBarLink title="Lego" href="/legos" />
             <HeaderBarLink title="Clothing" href="/clothing" />
+            <HeaderBarLink title="Charity Donation" href="/donate" />
           </nav>
         </div>
         <Sheet>
@@ -71,6 +72,11 @@ export function HeaderBar() {
               <HeaderBarLink
                 title="Clothing"
                 href="/clothing"
+                className="flex w-full items-center py-2 text-lg font-semibold"
+              />
+              <HeaderBarLink
+                title="Charity Donation"
+                href="/donate"
                 className="flex w-full items-center py-2 text-lg font-semibold"
               />
             </div>

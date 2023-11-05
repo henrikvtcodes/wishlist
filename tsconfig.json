@@ -19,7 +19,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
-      "~/cuid": ["./src/lib/cuid"]
+      "~/cuid": ["./src/lib/cuid"],
+      "~/ui/*": ["./src/components/ui/*"]
     },
     "plugins": [{ "name": "next" }]
   },

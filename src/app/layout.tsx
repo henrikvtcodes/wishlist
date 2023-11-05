@@ -1,8 +1,6 @@
 import "./globals.css";
-
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
-
 import { TRPCReactProvider } from "~/trpc/react";
 
 const inter = Inter({
@@ -23,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`font-sans ${inter.variable} min-h-screen w-screen overflow-hidden`}
+        className={`font-sans ${inter.variable} min-h-screen w-screen overflow-x-hidden`}
       >
         <TRPCReactProvider headers={headers()}>{children}</TRPCReactProvider>
       </body>

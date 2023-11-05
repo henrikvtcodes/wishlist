@@ -2,7 +2,6 @@ import { TRPCError } from "@trpc/server";
 import currency from "currency.js";
 import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod";
-
 import { requestRevalidate } from "~/lib/revalidate";
 import { createItemSchema, updateItemSchema } from "~/schemas/item";
 import { db } from "~/server/db";
@@ -11,7 +10,7 @@ import { protectedProcedure, publicProcedure, router } from "../trpc";
 
 const itemSelect = {
   id: true,
-  name: true,
+  name: false,
   description: true,
   imgUrl: true,
   isClaimed: true,
@@ -35,7 +34,6 @@ export const itemsRouter = router({
           and(eq(item.category, input.category), eq(item.type, input.type)),
         orderBy: (item) => [desc(item.createdAt)],
         limit: input.take,
-        with: itemSelect,
       });
 
       return items;
