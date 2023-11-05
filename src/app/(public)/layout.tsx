@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
-
 import { HeaderBar } from "./header-bar";
+import { UserWatcher } from "./user-watcher";
 
 type Props = {
   children: ReactNode;
@@ -9,7 +9,9 @@ type Props = {
 export default function Layout({ children }: Props) {
   return (
     <>
-      <HeaderBar /> {children}
+      <UserWatcher />
+      <HeaderBar />
+      {children}
     </>
   );
 }
