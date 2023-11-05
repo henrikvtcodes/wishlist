@@ -8,7 +8,7 @@ import { LinkButton } from "~/components/ui/button-link";
 import { vendorToTitleMap } from "~/constants";
 import { type Item } from "~/schemas/item";
 import * as Card from "~/ui/card";
-import ClaimButton from "./claim-button";
+import ClaimButton from "./claim";
 
 type Props = {
   item: Item;

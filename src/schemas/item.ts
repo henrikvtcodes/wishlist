@@ -23,6 +23,7 @@ export type CreateItemType = z.infer<typeof createItemSchema>;
 export type Item = Omit<CreateItemType, "price"> & {
   priceCents: number;
   isClaimed: boolean;
+  id: string;
 };
 
 export const updateItemSchema = createItemSchema.partial();
