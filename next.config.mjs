@@ -14,7 +14,7 @@ if (env.MIGRATE_DB || env.NODE_ENV === "production") {
 /** @type {import("next").NextConfig} */
 const config = {
   experimental: {
-    typedRoutes: true,
+    typedRoutes: false,
   },
   images: {
     remotePatterns: [

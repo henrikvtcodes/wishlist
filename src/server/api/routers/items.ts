@@ -84,7 +84,7 @@ export const itemsRouter = router({
     .query(async ({ input }) => {
       const item = await db.query.item.findFirst({
         where: (item) => eq(item.id, input.id),
-        with: { ...itemSelect, type: true, category: true, isClaimable: true },
+        // with: { ...itemSelect, type: true, category: true, isClaimable: true },
       });
 
       return item;

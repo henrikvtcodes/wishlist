@@ -1,4 +1,5 @@
 import currency from "currency.js";
+import { NextLinkButton } from "~/components/ui/button-link";
 import {
   Table,
   TableBody,
@@ -24,11 +25,12 @@ export async function ItemTable() {
             <TableHead>Type</TableHead>
             <TableHead>Claimable</TableHead>
             <TableHead>Claimed</TableHead>
+            <TableHead className="w-16 sr-only">Edit</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {items.map((item) => (
-            <TableRow key={item.id} className=" hover:cursor-pointer">
+            <TableRow key={item.id} className="">
               <TableCell>{item.name}</TableCell>
               <TableCell>
                 {currency(item.priceCents, { fromCents: true }).format()}
@@ -38,6 +40,14 @@ export async function ItemTable() {
               <TableCell>{item.type}</TableCell>
               <TableCell>{item.isClaimable ? "Yes" : "No"}</TableCell>
               <TableCell>{item.isClaimed ? "Yes" : "No"}</TableCell>
+              <TableCell>
+                <NextLinkButton
+                  variant={"link"}
+                  href={`/admin/item/${item.id}`}
+                >
+                  Edit
+                </NextLinkButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

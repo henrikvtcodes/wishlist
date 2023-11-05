@@ -19,3 +19,5 @@ export const vendorToTitleMap = new Map<ItemVendor, string>([
 ]);
 
 // type VendorToTitleMap = { [K in ItemVendor]: string };
+
+export const PROD_BASE_URL = new URL("https://wishlist.henrikvt.com");
