@@ -31,7 +31,7 @@
       "type Props = {\r",
       "  children: ReactNode;\r",
       "  params: {\r",
-      "    team: string;\r",
+      "    slug: string;\r",
       "  }\r",
       "}\r",
       "\r",
@@ -42,11 +42,31 @@
     "description": "Next.js App Dir Layout with Params"
   },
   "Page": {
+    "scope": "typescriptreact",
     "prefix": "pg",
     "body": [
       "\"use client\";\r",
       "\r",
       "export default function Page() {\r",
+      "  return <>Hello</>;\r",
+      "}\r",
+      ""
+    ],
+    "description": "Next.js App Dir Page"
+  },
+  "Page With Params": {
+    "scope": "typescriptreact",
+    "prefix": "pg-params",
+    "body": [
+      "\"use client\";\r",
+      "\r",
+      "type Props = {\r",
+      "  params: {\r",
+      "    slug: string;\r",
+      "  }\r",
+      "}\r",
+      "\r",
+      "export default function Page({ params }: Props) {\r",
       "  return <>Hello</>;\r",
       "}\r",
       ""
