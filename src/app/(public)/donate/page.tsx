@@ -18,10 +18,10 @@ export default function Page() {
           Given that I am now in college, have a part time job, and may be
           outgrowing the gifts thing, I figured I&apos;d put this here. If you
           would like, instead of purchasing me a thing for Christmas, I would
-          highly appreciate a donation to one of the charities below. <br /> The
-          other reason this is here is because I decidedly upped the ante
-          price-wise in putting together my list this year, and I don&apos;t
-          want to make anyone feel obligated to a lot on me.
+          highly appreciate a donation to the charity below. <br /> The other
+          reason this is here is because I decidedly upped the ante price-wise
+          in putting together my list this year, and I don&apos;t want to make
+          anyone feel obligated to a lot on me.
         </p>
         <MSFCard />
       </main>
