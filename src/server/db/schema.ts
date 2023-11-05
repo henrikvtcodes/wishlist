@@ -94,7 +94,7 @@ export const referrers = pgTable(
   {
     id: text("id").primaryKey().notNull().$defaultFn(cuid),
     name: text("name").notNull(),
-    ref: text("ref").notNull(),
+    ref: text("ref").notNull().unique(),
   },
   (table) => {
     return {
