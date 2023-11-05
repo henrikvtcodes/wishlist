@@ -15,6 +15,13 @@
       "when": 1699116795058,
       "tag": "0001_glamorous_archangel",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1699163085669,
+      "tag": "0002_good_archangel",
+      "breakpoints": true
     }
   ]
 }
