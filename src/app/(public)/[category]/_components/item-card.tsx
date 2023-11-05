@@ -1,8 +1,9 @@
 "use client";
 
+import currency from "currency.js";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { Button } from "~/components/ui/button";
+import { Badge } from "~/components/ui/badge";
 import { LinkButton } from "~/components/ui/button-link";
 import { vendorToTitleMap } from "~/constants";
 import { type Item } from "~/schemas/item";
@@ -31,6 +32,9 @@ export function ItemCard({ item }: Props) {
           className="!relative rounded-md" // Override weird next/image styles
           fill
         />
+        <Badge className="my-2" variant={"outline"}>
+          {currency(item.priceCents, { fromCents: true }).format()}
+        </Badge>
         <Card.CardDescription>
           <ScrollArea>{item.description}</ScrollArea>
         </Card.CardDescription>

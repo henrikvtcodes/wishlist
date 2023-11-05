@@ -1,4 +1,3 @@
-import { param } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { categoryToTitleMap } from "~/constants";
 import { itemCategory, type ItemCategory } from "~/server/db/schema";
