@@ -1,0 +1,4 @@
+.homeBgImg {
+  background-image: url("/undergroundhenrik.jpg");
+  @apply w-full bg-cover bg-fixed bg-center bg-no-repeat;
+}
