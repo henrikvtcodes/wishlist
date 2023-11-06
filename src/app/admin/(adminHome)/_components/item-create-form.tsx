@@ -62,7 +62,7 @@ export function ItemCreateForm() {
       const newItem = await createItem(data);
       void trpcUtils.items.invalidate();
       if (newItem.id && newItem.id.length > 0)
-        router.push(`/admin/items/${newItem.id}`);
+        router.push(`/admin/item/${newItem.id}`);
       toast({ title: "Item create" });
       setIsLoading(false);
     }),
@@ -228,24 +228,43 @@ export function ItemCreateForm() {
               />
             </div>
 
-            <FormField
-              control={form.control}
-              name="isClaimable"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-start rounded-lg border p-4">
-                  <FormLabel className="pr-4 text-base">Claimable</FormLabel>
+            <div className="flex gap-x-2">
+              <FormField
+                control={form.control}
+                name="isClaimable"
+                render={({ field }) => (
+                  <FormItem className="flex basis-1/2 flex-row items-center justify-start rounded-lg border p-4">
+                    <FormLabel className="pr-4 text-base">Claimable</FormLabel>
+                    <FormControl>
+                      <Switch
+                        className="!my-0"
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                  <FormControl>
-                    <Switch
-                      className="!my-0"
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="show"
+                render={({ field }) => (
+                  <FormItem className="flex basis-1/2 flex-row items-center justify-start rounded-lg border p-4">
+                    <FormLabel className="pr-4 text-base">Show</FormLabel>
+                    <FormControl>
+                      <Switch
+                        className="!my-0"
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <div className="flex justify-between pt-4">
               <Button size={"lg"} type="submit">

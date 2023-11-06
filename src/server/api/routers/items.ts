@@ -135,7 +135,7 @@ export const itemsRouter = router({
   update: protectedProcedure
     .input(
       z.object({
-        itemId: z.string().cuid(),
+        itemId: z.string(),
         data: updateItemSchema,
       }),
     )
@@ -155,6 +155,7 @@ export const itemsRouter = router({
           vendor: input.data.vendor,
           category: input.data.category,
           type: input.data.type,
+          show: input.data.show,
         })
         .where(eq(item.id, input.itemId))
         .returning({ category: item.category });

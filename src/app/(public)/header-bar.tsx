@@ -1,5 +1,6 @@
 import Image from "next/image";
 import NextLink from "next/link";
+
 import { Button } from "~/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { HeaderBarLink } from "./header-bar-link";
@@ -7,9 +8,9 @@ import { HeaderBarUser } from "./header-bar-user";
 
 export function HeaderBar() {
   return (
-    <section className="w-full py-4 px-6 sm:px-0 bg-white shadow-md dark:bg-zinc-800">
-      <div className="container w-full flex items-center justify-between">
-        <div className="flex items-center space-x-4 w-full">
+    <section className="w-full bg-white px-6 py-4 shadow-md dark:bg-zinc-800 sm:px-0">
+      <div className="container flex w-full items-center justify-between">
+        <div className="flex w-full items-center space-x-4">
           <NextLink href="/" className="flex">
             <Image
               src={"/undergroundhenrik-round.png"}
@@ -18,11 +19,12 @@ export function HeaderBar() {
               alt="Underground Henrik Logo"
             />
           </NextLink>
-          <nav id="large" className="hidden sm:flex space-x-10 pl-7">
+          <nav id="large" className="hidden space-x-10 pl-7 sm:flex">
             <HeaderBarLink title="Techology" href="/tech" />
             <HeaderBarLink title="Tools" href="/tools" />
             <HeaderBarLink title="Lego" href="/legos" />
             <HeaderBarLink title="Clothing" href="/clothing" />
+            <HeaderBarLink title="Misc" href="/misc" />
             <HeaderBarLink title="Charity Donation" href="/donate" />
           </nav>
           <div className="justify-self-end"></div>
