@@ -2,6 +2,8 @@
 
 import { Loader2Icon } from "lucide-react";
 import { useMemo } from "react";
+import { useIsClient } from "usehooks-ts";
+
 import { Button } from "~/components/ui/button";
 import { type Item } from "~/schemas/item";
 import { useClaimModal } from "~/stores/claimModal";
@@ -22,6 +24,9 @@ export default function ClaimButton({ item }: Props) {
     () => !item.isClaimable || item.isClaimed || !currentUser,
     [item, currentUser],
   );
+
+  const isClient = useIsClient();
+  if (!isClient) return null;
 
   return (
     <Button
@@ -46,7 +51,7 @@ export default function ClaimButton({ item }: Props) {
       }
     >
       {loading ? (
-        <Loader2Icon className=" animate-spin w-6 h-auto" />
+        <Loader2Icon className=" h-auto w-6 animate-spin" />
       ) : item.isClaimable ? (
         item.isClaimed ? (
           "Item Claimed"

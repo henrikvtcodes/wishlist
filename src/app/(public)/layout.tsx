@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+
 import { HeaderBar } from "./header-bar";
 import { UserWatcher } from "./user-watcher";
 
