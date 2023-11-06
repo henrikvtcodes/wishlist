@@ -19,10 +19,9 @@ export function HeaderBar() {
               alt="Underground Henrik Logo"
             />
           </NextLink>
-          <nav id="large" className="hidden space-x-10 pl-7 sm:flex">
+          <nav id="large" className="hidden space-x-10 pl-7 md:flex">
             <HeaderBarLink title="Techology" href="/tech" />
             <HeaderBarLink title="Tools" href="/tools" />
-            <HeaderBarLink title="Lego" href="/legos" />
             <HeaderBarLink title="Clothing" href="/clothing" />
             <HeaderBarLink title="Misc" href="/misc" />
             <HeaderBarLink title="Charity Donation" href="/donate" />
@@ -34,7 +33,7 @@ export function HeaderBar() {
           <SheetTrigger asChild>
             <Button
               id="small"
-              className="sm:hidden"
+              className="p-2 md:hidden"
               size="icon"
               variant="outline"
             >
@@ -70,13 +69,13 @@ export function HeaderBar() {
                 className="flex w-full items-center py-2 text-lg font-semibold"
               />
               <HeaderBarLink
-                title="Lego"
-                href="/legos"
+                title="Clothing"
+                href="/clothing"
                 className="flex w-full items-center py-2 text-lg font-semibold"
               />
               <HeaderBarLink
-                title="Clothing"
-                href="/clothing"
+                title="Misc"
+                href="/misc"
                 className="flex w-full items-center py-2 text-lg font-semibold"
               />
               <HeaderBarLink

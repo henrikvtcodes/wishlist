@@ -3,6 +3,7 @@
 import currency from "currency.js";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+
 import { Badge } from "~/components/ui/badge";
 import { LinkButton } from "~/components/ui/button-link";
 import { vendorToTitleMap } from "~/constants";
@@ -13,11 +14,6 @@ import ClaimButton from "./claim";
 type Props = {
   item: Item;
 };
-
-const ScrollArea = dynamic(
-  () => import("~/components/ui/scroll-area").then((e) => e.ScrollArea),
-  { ssr: false },
-);
 
 export function ItemCard({ item }: Props) {
   return (
@@ -35,8 +31,8 @@ export function ItemCard({ item }: Props) {
         <Badge className="my-2" variant={"outline"}>
           {currency(item.priceCents, { fromCents: true }).format()}
         </Badge>
-        <Card.CardDescription>
-          <ScrollArea>{item.description}</ScrollArea>
+        <Card.CardDescription className="max-h-[140px] overflow-y-scroll">
+          {item.description}
         </Card.CardDescription>
       </Card.CardContent>
       <Card.CardFooter className="flex flex-col gap-y-2">

@@ -2,6 +2,7 @@
 
 import { Loader2Icon } from "lucide-react";
 import { useCallback, useState } from "react";
+
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
@@ -52,7 +53,7 @@ export function ClaimModal() {
 
   return (
     <Dialog open={claimCtx !== null} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="">
         <DialogHeader>
           <DialogTitle>Claim Item</DialogTitle>
           <DialogDescription>
@@ -61,7 +62,7 @@ export function ClaimModal() {
             <span className="font-semibold">{claimCtx?.itemName}</span>?
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter>
+        <DialogFooter className="gap-y-2">
           <Button
             variant={"outline"}
             onClick={() => {
@@ -74,12 +75,12 @@ export function ClaimModal() {
           <Button
             onClick={onClaim}
             variant={"default"}
-            className=" transition-all ease-in-out duration-200"
+            className=" transition-all duration-200 ease-in-out"
             aria-disabled={isClaiming}
             disabled={isClaiming}
           >
             {isClaiming ? (
-              <Loader2Icon className=" animate-spin w-6 h-auto" />
+              <Loader2Icon className=" h-auto w-6 animate-spin" />
             ) : (
               "Confirm Claim"
             )}

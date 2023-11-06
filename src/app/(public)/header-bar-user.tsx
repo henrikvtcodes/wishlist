@@ -11,7 +11,7 @@ export function HeaderBarUser() {
   if (!isClient) return null;
 
   return userName ? (
-    <span className="inline-flex text-base font-medium text-gray-600">
+    <span className="inline-flex px-2 text-base font-medium text-gray-600">
       {"Hi"}
       <span className="pl-1 font-semibold">{userName}</span>
     </span>

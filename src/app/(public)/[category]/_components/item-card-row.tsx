@@ -19,12 +19,12 @@ export async function ItemCardRow({ category, itemType }: Props) {
 
   return (
     <section className="overflow-y-scroll">
-      <ul className="flex flex-col sm:flex-row flex-nowrap justify-evenly">
+      <ul className="flex flex-col flex-nowrap justify-evenly sm:flex-row">
         {items.map((item) => (
           <li
             key={item.id}
             className={cn(
-              itemType === "high" ? "basis-1/2" : "basis-1/3",
+              itemType === "high" ? "md:basis-1/2" : "md:basis-1/3",
               "grow-0 p-4",
             )}
           >
