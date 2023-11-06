@@ -95,7 +95,7 @@ export function ItemCreateForm() {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea className=" min-h-[200px]" {...field} />
+                    <Textarea className="min-h-[200px]" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -250,7 +250,7 @@ export function ItemCreateForm() {
             <div className="flex justify-between pt-4">
               <Button size={"lg"} type="submit">
                 {isLoading ? (
-                  <Loader2Icon className=" h-auto w-6 animate-spin" />
+                  <Loader2Icon className="h-auto w-6 animate-spin" />
                 ) : (
                   "Create Item"
                 )}
