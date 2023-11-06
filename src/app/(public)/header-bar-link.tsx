@@ -14,6 +14,7 @@ export function HeaderBarLink({ title, href, className }: Props) {
   const selectedSegment = useSelectedLayoutSegment();
   return (
     <NextLink
+      prefetch
       data-active={selectedSegment === href.slice(1)}
       className={twMerge(
         "text-base font-medium text-zinc-900 hover:text-secondary-foreground data-[active=true]:text-primary",

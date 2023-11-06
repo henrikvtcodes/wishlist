@@ -1,3 +1,4 @@
+import { fakeDelay } from "~/lib/fakeDelay";
 import { cn } from "~/lib/utils";
 import { type ItemCategory, type ItemType } from "~/server/db/schema";
 import { api } from "~/trpc/server";
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export async function ItemCardRow({ category, itemType }: Props) {
+  await fakeDelay(1000);
   const items = await api.items.some.query({
     category,
     type: itemType,
