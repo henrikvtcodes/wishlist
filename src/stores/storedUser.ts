@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 interface StoredUserData {
@@ -22,7 +22,7 @@ export const useStoredUser = create<StoredUserData & StoredUserActions>()(
       }),
       {
         name: "storedUser",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

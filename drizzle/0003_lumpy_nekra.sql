@@ -1,0 +1,1 @@
+ALTER TABLE "wishlist_Item" ADD COLUMN "show" boolean DEFAULT true NOT NULL;
