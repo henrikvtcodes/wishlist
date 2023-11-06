@@ -22,6 +22,20 @@
       "when": 1699163085669,
       "tag": "0002_good_archangel",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1699278014067,
+      "tag": "0003_lumpy_nekra",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1699278089119,
+      "tag": "0004_black_scarecrow",
+      "breakpoints": true
     }
   ]
 }

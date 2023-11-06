@@ -5,6 +5,7 @@ export const categoryToTitleMap = new Map<ItemCategory, string>([
   ["tools", "Tools"],
   ["legos", "Legos"],
   ["clothing", "Clothing"],
+  ["misc", "Other"],
 ]);
 
 // type CategoryToTitleMap = { [K in ItemCategory]: string };
@@ -15,6 +16,7 @@ export const vendorToTitleMap = new Map<ItemVendor, string>([
   ["Lego", "Lego"],
   ["HarborFreight", "Harbor Freight"],
   ["BHPhoto", "B&H Photo Video"],
+  ["Sweetwater", "Sweetwater"],
   ["Other", "Other"],
 ]);
 

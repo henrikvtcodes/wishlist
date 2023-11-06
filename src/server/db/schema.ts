@@ -10,12 +10,14 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
+
 import { cuid } from "~/cuid";
 
 export const itemCategory = pgEnum("ItemCategory", [
   "legos",
   "tools",
   "clothing",
+  "misc",
   "tech",
 ]);
 
@@ -32,6 +34,7 @@ export const itemVendor = pgEnum("ItemVendor", [
   "Lego",
   "HomeDepot",
   "Amazon",
+  "Sweetwater",
 ]);
 
 export type ItemVendor = (typeof itemVendor)["enumValues"][number];
@@ -122,4 +125,5 @@ export const item = pgTable("Item", {
     onDelete: "set null",
     onUpdate: "cascade",
   }),
+  show: boolean("show").default(true).notNull(),
 });
