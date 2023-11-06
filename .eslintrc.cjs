@@ -33,9 +33,9 @@ const config = {
   },
   overrides: [
     {
-      files: ["src/components/**/*.tsx"],
+      files: ["./src/components/**/*.{ts,tsx}"],
       rules: {
-        "@typescript-eslint/no-empty-interface": "warn",
+        "@typescript-eslint/no-empty-interface": "off",
       },
     },
   ],
