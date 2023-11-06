@@ -32,7 +32,11 @@ export const itemsRouter = router({
     .query(async ({ input }) => {
       const items = await db.query.item.findMany({
         where: (item) =>
-          and(eq(item.category, input.category), eq(item.type, input.type)),
+          and(
+            eq(item.category, input.category),
+            eq(item.type, input.type),
+            eq(item.show, true),
+          ),
         orderBy: (item) => [desc(item.createdAt)],
         limit: input.take,
       });
@@ -56,21 +60,33 @@ export const itemsRouter = router({
       const [large, medium, small] = await Promise.all([
         db.query.item.findMany({
           where: (item) =>
-            and(eq(item.category, input.category), eq(item.type, "high")),
+            and(
+              eq(item.category, input.category),
+              eq(item.type, "high"),
+              eq(item.show, true),
+            ),
           orderBy: (item) => [desc(item.createdAt)],
           limit: 2,
           with: { ...itemSelect, type: true, isClaimable: true },
         }),
         db.query.item.findMany({
           where: (item) =>
-            and(eq(item.category, input.category), eq(item.type, "medium")),
+            and(
+              eq(item.category, input.category),
+              eq(item.type, "medium"),
+              eq(item.show, true),
+            ),
           orderBy: (item) => [desc(item.createdAt)],
           limit: 3,
           with: { ...itemSelect, type: true, isClaimable: true },
         }),
         db.query.item.findMany({
           where: (item) =>
-            and(eq(item.category, input.category), eq(item.type, "base")),
+            and(
+              eq(item.category, input.category),
+              eq(item.type, "base"),
+              eq(item.show, true),
+            ),
           orderBy: (item) => [desc(item.createdAt)],
           limit: 3,
           with: { ...itemSelect, type: true, isClaimable: true },
