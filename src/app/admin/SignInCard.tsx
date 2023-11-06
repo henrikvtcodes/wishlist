@@ -12,7 +12,10 @@ export function SignInCard() {
         <CardTitle>Sign In</CardTitle>
       </CardHeader>
       <CardContent>
-        <Button variant={"default"} onClick={() => signIn("google")}>
+        <Button
+          variant={"default"}
+          onClick={() => signIn("google", { callbackUrl: "/admin/home" })}
+        >
           Sign In with Google
         </Button>
       </CardContent>

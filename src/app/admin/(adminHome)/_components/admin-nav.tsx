@@ -7,13 +7,13 @@ export function AdminNav() {
     <div className=" w-52">
       <div className="grid w-full grid-cols-2">
         <Link
-          className="text-center py-2 border-b-2 hover:border-zinc-900 dark:hover:border-zinc-50"
-          href="/admin"
+          className="border-b-2 py-2 text-center hover:border-zinc-900 dark:hover:border-zinc-50"
+          href="/admin/home"
         >
           Items
         </Link>
         <Link
-          className="text-center py-2 border-b-2 hover:border-zinc-900 dark:hover:border-zinc-50"
+          className="border-b-2 py-2 text-center hover:border-zinc-900 dark:hover:border-zinc-50"
           href="/admin/refs"
         >
           Refs

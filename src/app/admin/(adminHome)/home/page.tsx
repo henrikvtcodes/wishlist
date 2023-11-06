@@ -1,5 +1,5 @@
 import { NextLinkButton } from "~/components/ui/button-link";
-import { ItemTable } from "./_components/item-table";
+import { ItemTable } from "../_components/item-table";
 
 export default function Page() {
   return (
