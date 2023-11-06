@@ -25,4 +25,5 @@ export const itemData: (
   isClaimable: watch("isClaimable") ?? item.isClaimable,
   category: watch("category") ?? item.category,
   type: watch("type") ?? item.type,
+  show: watch("show") ?? item.show,
 });
