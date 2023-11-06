@@ -11,7 +11,10 @@ import {
 
 export const createItemSchema = z.object({
   name: z.string().max(64),
-  description: z.string().max(512).default(""),
+  description: z
+    .string()
+    .max(512 + 256)
+    .default(""),
   imgUrl: z.string().url(),
   itemUrl: z.string().url(),
   price: z.preprocess(
