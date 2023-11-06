@@ -1,6 +1,13 @@
 import currency from "currency.js";
 import { z } from "zod";
-import { itemCategory, itemType, itemVendor } from "~/server/db/schema";
+
+import {
+  itemCategory,
+  itemType,
+  itemVendor,
+  type ItemCategory,
+  type ItemType,
+} from "~/server/db/schema";
 
 export const createItemSchema = z.object({
   name: z.string().max(64),
@@ -24,6 +31,8 @@ export type Item = Omit<CreateItemType, "price"> & {
   priceCents: number;
   isClaimed: boolean;
   id: string;
+  type: ItemType;
+  category: ItemCategory;
 };
 
 export const updateItemSchema = createItemSchema.partial();
