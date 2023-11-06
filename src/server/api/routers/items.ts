@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import currency from "currency.js";
 import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod";
+
 import { requestRevalidate } from "~/lib/revalidate";
 import { createItemSchema, updateItemSchema } from "~/schemas/item";
 import { db } from "~/server/db";
@@ -93,21 +94,26 @@ export const itemsRouter = router({
   create: protectedProcedure
     .input(createItemSchema)
     .mutation(async ({ input }) => {
-      console.log("create item", { input });
-
-      await db.insert(item).values({
-        name: input.name,
-        description: input.description,
-        imgUrl: input.imgUrl,
-        itemUrl: input.itemUrl,
-        priceCents: currency(input.price).intValue,
-        vendor: input.vendor,
-        category: input.category,
-        type: input.type,
-        createdAt: new Date(),
-      });
+      const newItem = await db
+        .insert(item)
+        .values({
+          name: input.name,
+          description: input.description,
+          imgUrl: input.imgUrl,
+          itemUrl: input.itemUrl,
+          priceCents: currency(input.price).intValue,
+          vendor: input.vendor,
+          category: input.category,
+          type: input.type,
+          createdAt: new Date(),
+        })
+        .returning();
 
       requestRevalidate(input.category);
+
+      return {
+        id: newItem[0]?.id,
+      };
     }),
 
   update: protectedProcedure
