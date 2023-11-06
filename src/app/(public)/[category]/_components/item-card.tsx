@@ -1,7 +1,6 @@
 "use client";
 
 import currency from "currency.js";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 
 import { Badge } from "~/components/ui/badge";
