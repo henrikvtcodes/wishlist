@@ -31,7 +31,7 @@ export function ItemCard({ item }: Props) {
           {currency(item.priceCents, { fromCents: true }).format()}
         </Badge>
         <Card.CardDescription className="max-h-[140px] overflow-y-scroll">
-          {item.description.length > 612 ? <span className="italic font-medium">Scroll:</span> : null} {item.description}
+          {item.description.length > 544 ? <span className="italic font-medium">Scroll:</span> : null} {item.description}
         </Card.CardDescription>
       </Card.CardContent>
       <Card.CardFooter className="flex flex-col gap-y-2">
