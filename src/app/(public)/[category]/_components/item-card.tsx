@@ -5,7 +5,6 @@ import Image from "next/image";
 
 import { Badge } from "~/components/ui/badge";
 import { LinkButton } from "~/components/ui/button-link";
-import { Textarea } from "~/components/ui/textarea";
 import { vendorToTitleMap } from "~/constants";
 import { type Item } from "~/schemas/item";
 import * as Card from "~/ui/card";
