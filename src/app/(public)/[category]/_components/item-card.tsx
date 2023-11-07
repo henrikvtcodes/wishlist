@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { Badge } from "~/components/ui/badge";
 import { LinkButton } from "~/components/ui/button-link";
+import { Textarea } from "~/components/ui/textarea";
 import { vendorToTitleMap } from "~/constants";
 import { type Item } from "~/schemas/item";
 import * as Card from "~/ui/card";
@@ -30,8 +31,14 @@ export function ItemCard({ item }: Props) {
         <Badge className="my-2" variant={"outline"}>
           {currency(item.priceCents, { fromCents: true }).format()}
         </Badge>
-        <Card.CardDescription className="max-h-[140px] overflow-y-scroll">
-          {item.description.length > 544 ? <span className="italic font-medium">Scroll:</span> : null} {item.description}
+        <Card.CardDescription className="max-h-[141px] overflow-y-scroll rounded-md border border-input bg-background px-3 py-2">
+          {item.description}
+          {/* <Textarea
+            className=" !opacity-100"
+            value={item.description}
+            disabled
+            aria-disabled
+          /> */}
         </Card.CardDescription>
       </Card.CardContent>
       <Card.CardFooter className="flex flex-col gap-y-2">
