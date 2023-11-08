@@ -210,4 +210,18 @@ export const itemsRouter = router({
         })
         .where(eq(item.id, input.id));
     }),
+
+  checkClaimed: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const itemData = await db.query.item.findFirst({
+        where: (item) => eq(item.id, input.id),
+      });
+
+      if (!itemData) {
+        throw new TRPCError({ message: "Item not found", code: "NOT_FOUND" });
+      }
+
+      return itemData.isClaimed;
+    }),
 });

@@ -25,7 +25,7 @@ export const createItemSchema = z.object({
   vendor: z.enum(itemVendor.enumValues),
   category: z.enum(itemCategory.enumValues),
   type: z.enum(itemType.enumValues),
-  isClaimable: z.preprocess((isClaimable) => Boolean(isClaimable), z.boolean()),
+  isClaimable: z.coerce.boolean(),
   show: z.coerce.boolean().default(true),
 });
 

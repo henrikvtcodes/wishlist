@@ -44,9 +44,10 @@ export function ClaimModal() {
       id: claimCtx.itemId,
       refId: currentUser.id,
     });
-    closeModal();
     setIsClaiming(false);
-  }, [claimCtx, currentUser, mutateAsync]);
+    closeModal();
+    setClaimCardBtnLoading(false);
+  }, [claimCtx, closeModal, currentUser, mutateAsync, setClaimCardBtnLoading]);
 
   if (!currentUser) {
     return <></>;
