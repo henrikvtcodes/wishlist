@@ -44,6 +44,7 @@ export function ClaimModal() {
       id: claimCtx.itemId,
       refId: currentUser.id,
     });
+    closeModal();
     setIsClaiming(false);
   }, [claimCtx, currentUser, mutateAsync]);
 
