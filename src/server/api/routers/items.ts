@@ -222,6 +222,6 @@ export const itemsRouter = router({
         throw new TRPCError({ message: "Item not found", code: "NOT_FOUND" });
       }
 
-      return itemData.isClaimed;
+      return { claimed: itemData.isClaimed };
     }),
 });

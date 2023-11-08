@@ -8,6 +8,7 @@ import { Button } from "~/components/ui/button";
 import { type Item } from "~/schemas/item";
 import { useClaimModal } from "~/stores/claimModal";
 import { useStoredUser } from "~/stores/storedUser";
+import { api } from "~/trpc/react";
 
 type Props = {
   item: Item;
@@ -20,9 +21,18 @@ export default function ClaimButton({ item }: Props) {
 
   const currentUser = useStoredUser((state) => state.user);
 
+  const { data } = api.items.checkClaimed.useQuery(
+    { id: item.id },
+    {
+      initialData: {
+        claimed: item.isClaimed,
+      },
+    },
+  );
+
   const isDisabled = useMemo(
-    () => !item.isClaimable || item.isClaimed || !currentUser,
-    [item, currentUser],
+    () => !item.isClaimable || !currentUser || data.claimed,
+    [item, currentUser, data],
   );
 
   const isClient = useIsClient();
@@ -53,7 +63,7 @@ export default function ClaimButton({ item }: Props) {
       {loading ? (
         <Loader2Icon className=" h-auto w-6 animate-spin" />
       ) : item.isClaimable ? (
-        item.isClaimed ? (
+        data.claimed ? (
           "Item Claimed"
         ) : !currentUser ? (
           "Login to claim"

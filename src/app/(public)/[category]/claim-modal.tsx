@@ -26,6 +26,7 @@ export function ClaimModal() {
   const [isClaiming, setIsClaiming] = useState(false);
 
   const { mutateAsync } = api.items.claim.useMutation();
+  const trpcUtils = api.useUtils();
 
   const onOpenChange = useCallback(
     (isOpen: boolean) => {
@@ -44,10 +45,18 @@ export function ClaimModal() {
       id: claimCtx.itemId,
       refId: currentUser.id,
     });
+    await trpcUtils.items.invalidate();
     setIsClaiming(false);
     closeModal();
     setClaimCardBtnLoading(false);
-  }, [claimCtx, closeModal, currentUser, mutateAsync, setClaimCardBtnLoading]);
+  }, [
+    claimCtx,
+    closeModal,
+    currentUser,
+    mutateAsync,
+    setClaimCardBtnLoading,
+    trpcUtils.items,
+  ]);
 
   if (!currentUser) {
     return <></>;
