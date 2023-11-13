@@ -165,7 +165,7 @@ export const itemsRouter = router({
     }),
 
   delete: protectedProcedure
-    .input(z.object({ itemId: z.string().cuid() }))
+    .input(z.object({ itemId: z.string() }))
     .mutation(async ({ input }) => {
       const deleted = await db
         .delete(item)
@@ -177,7 +177,7 @@ export const itemsRouter = router({
     }),
 
   claim: publicProcedure
-    .input(z.object({ id: z.string().cuid(), refId: z.string().cuid() }))
+    .input(z.object({ id: z.string(), refId: z.string() }))
     .mutation(async ({ input }) => {
       const itemData = await db.query.item.findFirst({
         where: (item) => eq(item.id, input.id),
