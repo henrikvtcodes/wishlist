@@ -1,4 +1,5 @@
-import { fakeDelay } from "~/lib/fakeDelay";
+import { marked } from "marked";
+
 import { cn } from "~/lib/utils";
 import { type ItemCategory, type ItemType } from "~/server/db/schema";
 import { api } from "~/trpc/server";
@@ -10,12 +11,15 @@ type Props = {
 };
 
 export async function ItemCardRow({ category, itemType }: Props) {
-  await fakeDelay(1000);
   const items = await api.items.some.query({
     category,
     type: itemType,
     take: itemType === "high" ? 2 : 3,
   });
+
+  for (const item of items) {
+    item.description = await marked(item.description);
+  }
 
   return (
     <section className="overflow-y-scroll">
