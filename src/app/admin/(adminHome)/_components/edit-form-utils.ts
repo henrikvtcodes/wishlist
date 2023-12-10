@@ -1,4 +1,5 @@
 import currency from "currency.js";
+import { marked } from "marked";
 import { type UseFormWatch } from "react-hook-form";
 
 import {
@@ -13,7 +14,9 @@ export const itemData: (
 ) => Item = (item, watch) => ({
   id: item.id,
   name: watch("name") ?? item.name,
-  description: watch("description") ?? item.description,
+  description: marked(watch("description") ?? item.description, {
+    async: false,
+  }) as string,
   imgUrl: watch("imgUrl") ?? item.imgUrl,
   itemUrl: watch("itemUrl") ?? item.itemUrl,
   priceCents:

@@ -30,15 +30,10 @@ export function ItemCard({ item }: Props) {
         <Badge className="my-2" variant={"outline"}>
           {currency(item.priceCents, { fromCents: true }).format()}
         </Badge>
-        <Card.CardDescription className="max-h-[141px] overflow-y-scroll rounded-md border border-input bg-background px-3 py-2">
-          {item.description}
-          {/* <Textarea
-            className=" !opacity-100"
-            value={item.description}
-            disabled
-            aria-disabled
-          /> */}
-        </Card.CardDescription>
+        <Card.CardDescription
+          className="prose max-h-[141px] overflow-y-scroll rounded-md border border-input bg-background px-3 py-2"
+          dangerouslySetInnerHTML={{ __html: item.description }}
+        ></Card.CardDescription>
       </Card.CardContent>
       <Card.CardFooter className="flex flex-col gap-y-2">
         <LinkButton
