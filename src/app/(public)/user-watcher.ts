@@ -1,7 +1,7 @@
 "use client";
 
 // import { usePlausible } from "next-plausible";
-import { loglib } from "@logLib/tracker";
+import { loglib } from "@loglib/tracker";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
