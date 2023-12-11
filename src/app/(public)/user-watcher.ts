@@ -28,8 +28,12 @@ export function UserWatcher() {
   }, [data, setUser]);
 
   useEffect(() => {
-    if (user !== null) {
-      loglib.identify({ id: user.id, name: user.name });
+    try {
+      if (user !== null) {
+        loglib.identify({ id: user.id, name: user.name });
+      }
+    } catch (error) {
+      console.error("Unable to log user", error);
     }
   }, [user]);
 
