@@ -1,3 +1,4 @@
+import Loglib from "@loglib/tracker/react";
 import { type ReactNode } from "react";
 
 import { HeaderBar } from "./header-bar";
@@ -13,6 +14,12 @@ export default function Layout({ children }: Props) {
       <UserWatcher />
       <HeaderBar />
       {children}
+      <Loglib
+        config={{
+          id: "wishlist_henrikvt",
+          host: "/api/log/lib",
+        }}
+      />
     </>
   );
 }

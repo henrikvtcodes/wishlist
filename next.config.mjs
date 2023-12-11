@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 // @ts-check
 // await import("./drand.mjs");
 
@@ -26,6 +27,14 @@ const config = {
         hostname: "action.msf.ca",
       },
     ],
+  },
+  rewrites: async () => {
+    return [
+      {
+        source: "/api/log/lib",
+        destination: "https://loglib.io/api/loglib",
+      },
+    ];
   },
 };
 
