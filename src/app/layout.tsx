@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import Loglib from "@loglib/tracker/react";
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
 
@@ -27,8 +28,14 @@ export default function RootLayout({
         className={`font-sans ${inter.variable} min-h-screen w-screen overflow-x-hidden`}
       >
         <TRPCReactProvider headers={headers()}>{children}</TRPCReactProvider>
-        {/* {children} */}
         <Toaster />
+        <Loglib
+          config={{
+            id: "wishlist_henrikvt",
+            host: "/api/log/lib",
+            consent: "granted",
+          }}
+        />
       </body>
     </html>
   );
