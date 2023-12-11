@@ -79,8 +79,14 @@ export function ItemEditForm({ item: initialItemData }: Props) {
   const onSubmit = useCallback(
     handleSubmit(async (data) => {
       setIsLoading(true);
-      await updateItem({ itemId: initialItemData.id, data });
-      void trpcUtils.items.invalidate();
+      try {
+        await updateItem({ itemId: initialItemData.id, data });
+        void trpcUtils.items.invalidate();
+      } catch (e) {
+        toast({ title: "Error updating item" });
+        setIsLoading(false);
+        return;
+      }
       toast({ title: "Item updated" });
       setIsLoading(false);
     }),
@@ -89,9 +95,15 @@ export function ItemEditForm({ item: initialItemData }: Props) {
 
   const onDelete = useCallback(async () => {
     setIsLoading(true);
-    await trpcUtils.items.one.cancel({ id: initialItemData.id });
-    await deleteItem({ itemId: initialItemData.id });
-    void trpcUtils.items.invalidate();
+    try {
+      await trpcUtils.items.one.cancel({ id: initialItemData.id });
+      await deleteItem({ itemId: initialItemData.id });
+      void trpcUtils.items.invalidate();
+    } catch (e) {
+      toast({ title: "Error deleting item" });
+      setIsLoading(false);
+      return;
+    }
     router.push("/admin");
     toast({ title: "Item deleted" });
     setIsLoading(false);

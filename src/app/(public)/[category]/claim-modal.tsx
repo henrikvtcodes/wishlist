@@ -12,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
+import { toast } from "~/components/ui/use-toast";
 import { useClaimModal } from "~/stores/claimModal";
 import { useStoredUser } from "~/stores/storedUser";
 import { api } from "~/trpc/react";
@@ -41,11 +42,17 @@ export function ClaimModal() {
   const onClaim = useCallback(async () => {
     setIsClaiming(true);
     if (!currentUser || !claimCtx) return;
-    await mutateAsync({
-      id: claimCtx.itemId,
-      refId: currentUser.id,
-    });
-    await trpcUtils.items.invalidate();
+    try {
+      await mutateAsync({
+        id: claimCtx.itemId,
+        refId: currentUser.id,
+      });
+      await trpcUtils.items.invalidate();
+    } catch (e) {
+      setIsClaiming(false);
+      toast({ title: "Error claiming item, try again" });
+      return;
+    }
     setIsClaiming(false);
     closeModal();
     setClaimCardBtnLoading(false);

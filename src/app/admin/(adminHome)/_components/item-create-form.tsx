@@ -59,8 +59,15 @@ export function ItemCreateForm() {
   const onSubmit = useCallback(
     handleSubmit(async (data) => {
       setIsLoading(true);
-      const newItem = await createItem(data);
-      void trpcUtils.items.invalidate();
+      let newItem: { id: string | undefined };
+      try {
+        newItem = await createItem(data);
+        void trpcUtils.items.invalidate();
+      } catch (e) {
+        toast({ title: "Error creating item" });
+        setIsLoading(false);
+        return;
+      }
       if (newItem.id && newItem.id.length > 0)
         router.push(`/admin/item/${newItem.id}`);
       toast({ title: "Item create" });
