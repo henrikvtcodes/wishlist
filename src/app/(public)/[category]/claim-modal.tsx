@@ -1,5 +1,6 @@
 "use client";
 
+import { loglib } from "@loglib/tracker";
 import { Loader2Icon } from "lucide-react";
 import { useCallback, useState } from "react";
 
@@ -53,6 +54,10 @@ export function ClaimModal() {
       toast({ title: "Error claiming item, try again" });
       return;
     }
+    loglib.track("item.claimed", {
+      item_id: claimCtx.itemId,
+      user_id: currentUser.id,
+    });
     setIsClaiming(false);
     closeModal();
     setClaimCardBtnLoading(false);

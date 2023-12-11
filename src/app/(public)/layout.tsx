@@ -18,6 +18,7 @@ export default function Layout({ children }: Props) {
         config={{
           id: "wishlist_henrikvt",
           host: "/api/log/lib",
+          consent: "granted",
         }}
       />
     </>

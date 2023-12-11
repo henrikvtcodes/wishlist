@@ -1,6 +1,7 @@
 "use client";
 
 // import { usePlausible } from "next-plausible";
+import { loglib } from "@logLib/tracker";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -11,6 +12,7 @@ export function UserWatcher() {
   const searchParams = useSearchParams();
   // const plausible = usePlausible();
   const setUser = useStoredUser((state) => state.setUser);
+  const user = useStoredUser((state) => state.user);
 
   const { data } = api.refs.getRef.useQuery(
     {
@@ -24,6 +26,12 @@ export function UserWatcher() {
       setUser({ name: data.name, id: data.id });
     }
   }, [data, setUser]);
+
+  useEffect(() => {
+    if (user !== null) {
+      loglib.identify({ id: user.id, name: user.name });
+    }
+  }, [user]);
 
   // useEffect(() => {
   //   if (user !== null) {

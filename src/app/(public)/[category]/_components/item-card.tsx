@@ -1,5 +1,6 @@
 "use client";
 
+import { TrackClick } from "@loglib/tracker/react";
 import currency from "currency.js";
 import Image from "next/image";
 
@@ -36,17 +37,22 @@ export function ItemCard({ item }: Props) {
         ></Card.CardDescription>
       </Card.CardContent>
       <Card.CardFooter className="flex flex-col gap-y-2">
-        <LinkButton
-          variant={"outline"}
-          className="w-full"
-          size={"lg"}
-          href={item.itemUrl}
-          target="_blank"
+        <TrackClick
+          name={"item.viewButton"}
+          payload={{ itemUrl: item.itemUrl, itemName: item.name }}
         >
-          {item.vendor === "Other"
-            ? "Go to item"
-            : `See item at ${vendorToTitleMap.get(item.vendor)}`}
-        </LinkButton>
+          <LinkButton
+            variant={"outline"}
+            className="w-full"
+            size={"lg"}
+            href={item.itemUrl}
+            target="_blank"
+          >
+            {item.vendor === "Other"
+              ? "Go to item"
+              : `See item at ${vendorToTitleMap.get(item.vendor)}`}
+          </LinkButton>
+        </TrackClick>
         <ClaimButton item={item} />
       </Card.CardFooter>
     </Card.Card>
