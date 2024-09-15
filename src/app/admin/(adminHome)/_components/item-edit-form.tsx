@@ -81,7 +81,7 @@ export function ItemEditForm({ item: initialItemData }: Props) {
       setIsLoading(true);
       try {
         await updateItem({ itemId: initialItemData.id, data });
-        void trpcUtils.items.invalidate();
+        await trpcUtils.items.invalidate();
       } catch (e) {
         toast({ title: "Error updating item" });
         setIsLoading(false);
@@ -98,7 +98,7 @@ export function ItemEditForm({ item: initialItemData }: Props) {
     try {
       await trpcUtils.items.one.cancel({ id: initialItemData.id });
       await deleteItem({ itemId: initialItemData.id });
-      void trpcUtils.items.invalidate();
+      await trpcUtils.items.invalidate();
     } catch (e) {
       toast({ title: "Error deleting item" });
       setIsLoading(false);
