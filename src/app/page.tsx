@@ -27,7 +27,7 @@ export default function Page() {
         <CardHeader>
           <CardTitle>{"Henrik's Wishlist"}</CardTitle>
           <CardDescription>
-            {`Welcome to my new and improved wish for 2023! This year I've rebuilt it from scratch with improvements to the claiming system. This year I have also added a charity donation option, to balance the fact that I've added some more expensive items.`}
+            {`Welcome to my wishlist for 2024! It's a bit smaller this year but still contains the same charity recommendation as last year. Gifts are wants not needs!`}
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex flex-col gap-y-2 sm:flex-row  sm:gap-x-1 sm:gap-y-0">
