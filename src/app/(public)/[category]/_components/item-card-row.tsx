@@ -22,7 +22,7 @@ export async function ItemCardRow({ category, itemType }: Props) {
   }
 
   return (
-    <section className="overflow-y-scroll">
+    <section className="">
       <ul className="flex flex-col flex-nowrap justify-evenly sm:flex-row">
         {items.map((item) => (
           <li
