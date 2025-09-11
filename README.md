@@ -1,27 +1,38 @@
-# MyList
+# sv
 
-MyList is a custom gift registry I made as my personal wishlist for my birthday and Christmas, at the request of my family.
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-**Features**
+## Creating a project
 
-- Different Categories of items
-- Live Preview when editing
-- Google OAuth, restricted to 1 email for security
-- Gift claiming system to prevent duplicate gifts
+If you're seeing this, you've probably already done this step. Congrats!
 
-## Tech Stack
+```sh
+# create a new project in the current directory
+npx sv create
 
-These are the technologies and key libraries I used to develop this project.
+# create a new project in my-app
+npx sv create my-app
+```
 
-### Frontend
+## Developing
 
-**Language:** Typescript (JSX)  
-**UI Library:** React.js (w/ Server Components)
-**Styling & UI Components:** Tailwind CSS & shadcn/ui
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-### Backend
+```sh
+npm run dev
 
-**Language:** Typescript  
-**Framework:** Next.js 14 (App Directory)  
-**Backend:** Next.js
-**Database & ORM:** Postgres (Drizzle ORM)
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```sh
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
