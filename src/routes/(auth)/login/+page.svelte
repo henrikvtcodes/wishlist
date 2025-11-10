@@ -37,7 +37,7 @@
 		{/if}</Button
 	>
 
-	<Button href="/login/p{email ? `?e=${encodeURIComponent(email)}` : ''}" variant="link"
+	<!-- <Button href="/login/p{email ? `?e=${encodeURIComponent(email)}` : ''}" variant="link"
 		>Log in with a password</Button
-	>
+	> -->
 </Card.Content>
