@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 export const serverEnv = createEnv({
 	server: {
-		DATABASE_URL: z.string().nonempty()
+		CONVEX_DEPLOYMENT: z.string().nonempty()
 	},
 	client: {},
 	clientPrefix: 'PUBLIC_',

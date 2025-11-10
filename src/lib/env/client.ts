@@ -1,11 +1,12 @@
 import { building } from '$app/environment';
 import { env as runtimeEnv } from '$env/dynamic/public';
 import { createEnv } from '@t3-oss/env-core';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { z } from 'zod';
 
 export const clientEnv = createEnv({
-	client: {},
+	client: {
+		PUBLIC_CONVEX_URL: z.url()
+	},
 	clientPrefix: 'PUBLIC_',
 	runtimeEnv,
 	emptyStringAsUndefined: true,
