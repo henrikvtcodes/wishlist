@@ -13,7 +13,7 @@ const schema = defineSchema({
 		name: v.optional(v.string()),
 		phone: v.optional(v.string()),
 		phoneVerificationTime: v.optional(v.float64()),
-		role: v.union(v.literal('admin'), v.literal('user'))
+		role: v.optional(v.union(v.literal('admin'), v.literal('user')))
 	})
 		.index('email', ['email'])
 		.index('phone', ['phone']),

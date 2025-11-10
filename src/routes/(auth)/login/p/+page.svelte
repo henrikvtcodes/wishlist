@@ -6,12 +6,18 @@
 	import { page } from '$app/state';
 	import { useAuth } from '@mmailaender/convex-auth-svelte/sveltekit';
 
-	let email = $state<string>();
-	let password = $state<string>();
+	let email = $state<string>(decodeURIComponent(page.url.searchParams.get('e') ?? ''));
+	let password = $state<string>('');
+	let submitting = $state<boolean>(false);
 
-	const isAuthenticated = $derived(useAuth().isAuthenticated);
 	const isLoading = $derived(useAuth().isLoading);
 	const { signIn, signOut } = useAuth();
+
+	function handleEmailSignIn(email: string, password: string) {
+		submitting = true;
+		signIn('password', { email, password, flow: 'signIn' });
+		submitting = false;
+	}
 </script>
 
 <Card.Content class="flex flex-col gap-y-4">
@@ -20,7 +26,7 @@
 		id="email"
 		name="email"
 		autocomplete="email"
-		defaultValue={decodeURIComponent(page.url.searchParams.get('e') ?? '')}
+		disabled={submitting}
 		bind:value={email}
 		placeholder="hello@henrikvt.com"
 	/>
@@ -30,11 +36,20 @@
 		name="password"
 		type="password"
 		autocomplete="current-password"
+		disabled={submitting}
 		bind:value={password}
 	/>
-	<Button>Log in</Button>
+	<Button onclick={() => handleEmailSignIn(email, password)} disabled={submitting}
+		>{#if submitting}
+			Signing in
+		{:else}
+			Log in
+		{/if}</Button
+	>
 
-	<Button href={`/login${email ? `?e=${encodeURIComponent(email)}` : ''}`} variant="link"
-		>Log in with a magic link</Button
+	<Button
+		disabled={submitting}
+		href={`/login${email ? `?e=${encodeURIComponent(email)}` : ''}`}
+		variant="link">Log in with a magic link</Button
 	>
 </Card.Content>
