@@ -4,9 +4,14 @@
 	import Input from '@/components/ui/input/input.svelte';
 	import Label from '@/components/ui/label/label.svelte';
 	import { page } from '$app/state';
+	import { useAuth } from '@mmailaender/convex-auth-svelte/sveltekit';
 
 	let email = $state<string>();
 	let password = $state<string>();
+
+	const isAuthenticated = $derived(useAuth().isAuthenticated);
+	const isLoading = $derived(useAuth().isLoading);
+	const { signIn, signOut } = useAuth();
 </script>
 
 <Card.Content class="flex flex-col gap-y-4">

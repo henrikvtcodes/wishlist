@@ -1,26 +1,12 @@
-import type { Handle } from '@sveltejs/kit';
-import * as auth from '$lib/server/auth';
+// src/hooks.server.ts
+import { sequence } from '@sveltejs/kit/hooks';
+import { createConvexAuthHooks } from '@mmailaender/convex-auth-svelte/sveltekit/server';
 
-const handleAuth: Handle = async ({ event, resolve }) => {
-	const sessionToken = event.cookies.get(auth.sessionCookieName);
+// Create auth hooks - convexUrl is automatically detected from environment
+const { handleAuth } = createConvexAuthHooks();
 
-	if (!sessionToken) {
-		event.locals.user = null;
-		event.locals.session = null;
-		return resolve(event);
-	}
-
-	const { session, user } = await auth.validateSessionToken(sessionToken);
-
-	if (session) {
-		auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
-	} else {
-		auth.deleteSessionTokenCookie(event);
-	}
-
-	event.locals.user = user;
-	event.locals.session = session;
-	return resolve(event);
-};
-
-export const handle: Handle = handleAuth;
+// Apply hooks in sequence
+export const handle = sequence(
+	handleAuth // This handles all POST requests to /api/auth automatically
+	// Your other custom handlers...
+);
