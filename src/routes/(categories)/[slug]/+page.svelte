@@ -4,11 +4,10 @@
 	let { data, params }: PageProps = $props();
 	import { useQuery } from 'convex-svelte';
 	import { api } from '../../../convex/_generated/api';
-	import { derived } from 'svelte/store';
 	import ItemRenderedViewCard from '@/components/item/ItemRenderedViewCard.svelte';
 
-	const category = $derived(useQuery(api.categories.one, { slug: params.slug }));
-	const items = $derived(useQuery(api.items.allPublicInCategory, { categorySlug: params.slug }));
+	const category = useQuery(api.categories.one, () => ({ slug: params.slug }));
+	const items = useQuery(api.items.allPublicInCategory, () => ({ categorySlug: params.slug }));
 </script>
 
 <div class="grid min-h-32 w-screen place-content-center border-b-2 border-b-zinc-200">
