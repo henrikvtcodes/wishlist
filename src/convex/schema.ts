@@ -20,22 +20,30 @@ const schema = defineSchema({
 	items: defineTable({
 		name: v.string(),
 		description: v.string(),
-		price: v.int64(),
+		priceCents: v.int64(),
 		claimable: v.boolean(),
 		claimedBy: v.optional(v.id('users')),
 		showPublic: v.boolean(),
 		draftMode: v.boolean(),
 		showOnlyTo: v.array(v.id('users')),
 		vendorName: v.string(),
-		itemUrl: v.string(),
-		imageUrl: v.string(),
-		categoryId: v.optional(v.id('categories'))
-	}),
+		itemUrl: v.optional(v.string()),
+		imageUrl: v.optional(v.string()),
+		categoryId: v.optional(v.id('categories')),
+		priority: v.number()
+	})
+		.index('filter', ['categoryId', 'showPublic', 'draftMode'])
+		.index('by_category', ['categoryId'])
+		.index('by_showable', ['showPublic', 'draftMode'])
+		.index('by_priority', ['priority'])
+		.index('privateItem', ['showOnlyTo']),
 	categories: defineTable({
 		name: v.string(),
 		slug: v.string(),
 		priority: v.number()
 	})
+		.index('by_priority', ['priority'])
+		.index('by_slug', ['slug'])
 });
 
 export default schema;
