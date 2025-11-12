@@ -15,7 +15,7 @@
 
 	function handleMagicLinkSignIn(email: string) {
 		submitting = true;
-		signIn('resend', { email, flow: 'signIn' });
+		signIn('resend', { email });
 		submitting = false;
 		submitted = true;
 	}
