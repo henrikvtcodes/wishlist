@@ -1,1 +1,0 @@
-ALTER TABLE "wishlist_Referrers" ADD CONSTRAINT "wishlist_Referrers_ref_unique" UNIQUE("ref");
