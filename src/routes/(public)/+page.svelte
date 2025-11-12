@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+	import { Card, CardHeader, CardTitle, CardDescription } from '$lib/components/ui/card';
 	import type { PageProps } from './$types';
-	import CardContent from '@/components/ui/card/card-content.svelte';
+	import CardContent from '$lib/components/ui/card/card-content.svelte';
 
 	let { data }: PageProps = $props();
 </script>
@@ -14,3 +14,7 @@
 		</CardContent>
 	</Card>
 </div>
+
+<svelte:head>
+	<title>henrik's wishlist</title>
+</svelte:head>

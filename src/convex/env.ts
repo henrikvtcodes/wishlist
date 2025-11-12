@@ -1,3 +1,3 @@
-import { serverEnvFactory } from '@/env/serverEnvSchema';
+import { serverEnvFactory } from '$lib/env/serverEnvSchema';
 
 export const env = serverEnvFactory(process.env, false);

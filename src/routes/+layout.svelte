@@ -1,8 +1,8 @@
 <script lang="ts">
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import { Toaster } from '@/components/ui/sonner';
-	import { env } from '@/env/client';
+	import { Toaster } from '$lib/components/ui/sonner';
+	import { env } from '$lib/env/client';
 
 	import { setupConvex } from 'convex-svelte';
 	import { setupConvexAuth } from '@mmailaender/convex-auth-svelte/sveltekit';

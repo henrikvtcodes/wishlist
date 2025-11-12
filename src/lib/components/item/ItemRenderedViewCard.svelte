@@ -12,29 +12,36 @@
 	};
 
 	let { item }: Props = $props();
+
+	let claimButtonText = $derived.by(() => {
+		let text = 'Claim';
+		if (!item.claimable) {
+			text = 'Not claimable';
+		} else if (item.isClaimed) {
+			text = 'Item claimed';
+		}
+		return text;
+	});
 </script>
 
 <Card class="h-max w-full">
 	<CardHeader><CardTitle>{item.name}</CardTitle></CardHeader>
+
+	{#if item.imageUrl !== undefined && item.imageUrl !== null}
+		<CardContent>
+			<img class="rounded" src={item.imageUrl} alt={`Photo of ${item.name}`} />
+		</CardContent>
+	{/if}
 
 	<CardContent>
 		<Badge>{currency(item.priceCents, { fromCents: true }).format()}</Badge>
 		<p>{item.description}</p>
 	</CardContent>
 
-	<CardFooter>
-		{#if item.claimable && item.itemUrl !== undefined}
-			<ButtonGroup.Root class="w-full">
-				<Button variant="default">Claim</Button>
-				<Button variant="secondary">View Item</Button>
-			</ButtonGroup.Root>
-		{:else}
-			{#if item.claimable}
-				<Button>Claim</Button>
-			{/if}
-			{#if item.itemUrl !== undefined}
-				<Button>View Item</Button>
-			{/if}
+	<CardFooter class="flex gap-x-2">
+		<Button class="basis-1/2" disabled={item.isClaimed} variant="default">{claimButtonText}</Button>
+		{#if item.itemUrl !== undefined}
+			<Button class="basis-1/2" variant="secondary">View Item</Button>
 		{/if}
 	</CardFooter>
 </Card>

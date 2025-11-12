@@ -9,7 +9,8 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
-			'@/*': './src/lib'
+			$convex: './src/convex',
+			'$lib/*': './src/lib/*'
 		}
 	}
 };

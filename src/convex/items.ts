@@ -1,6 +1,6 @@
 import { v } from 'convex/values';
 import { query } from './_generated/server';
-import type { Item } from '@/components/item/types';
+import type { Item } from '$libcomponents/item/types';
 import { pick, merge } from 'es-toolkit/object';
 
 export const allPublicInCategory = query({

@@ -4,12 +4,12 @@
 	import { api } from '../../convex/_generated/api';
 	import Button from './ui/button/button.svelte';
 
-	const viewer = useQuery(api.users.viewer, {}, () => ({}));
+	const viewer = useQuery(api.users.viewer);
 	const isAuthenticated = $derived(useAuth().isAuthenticated);
 
 	const { signOut } = useAuth();
 
-	// console.log({ data: viewer.data });
+	// vhlkjh8
 </script>
 
 {#if !viewer.isLoading}
