@@ -1,9 +1,10 @@
 <script>
 	import HeaderUser from './HeaderUser.svelte';
 	import TreePineIcon from 'lucide-svelte/icons/tree-pine';
-	import { Card } from './ui/card';
+	import { Card } from '$lib/components/ui/card';
 	import { useQuery } from 'convex-svelte';
-	import { api } from '../../convex/_generated/api';
+	import { api } from '$convex/_generated/api';
+	import { env } from '$lib/env/client';
 
 	const categories = useQuery(api.categories.all, {}, () => ({}));
 </script>
@@ -20,6 +21,10 @@
 
 			<a href="/donate">Donate</a>
 		</div>
-		<div class="shrink-0"><HeaderUser /></div>
+		<div class="shrink-0">
+			{#if env.PUBLIC_CLAIMING_ENABLE}
+				<HeaderUser />
+			{/if}
+		</div>
 	</Card>
 </header>

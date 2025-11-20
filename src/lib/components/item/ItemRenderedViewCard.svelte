@@ -6,6 +6,7 @@
 
 	import currency from 'currency.js';
 	import { Button } from '$lib/components/ui/button';
+	import { env } from '$lib/env/client';
 
 	type Props = {
 		item: Item;
@@ -39,7 +40,11 @@
 	</CardContent>
 
 	<CardFooter class="flex gap-x-2">
-		<Button class="basis-1/2" disabled={item.isClaimed} variant="default">{claimButtonText}</Button>
+		{#if env.PUBLIC_CLAIMING_ENABLE}
+			<Button class="basis-1/2" disabled={item.isClaimed} variant="default"
+				>{claimButtonText}</Button
+			>
+		{/if}
 		{#if item.itemUrl !== undefined}
 			<Button class="basis-1/2" variant="secondary">View Item</Button>
 		{/if}

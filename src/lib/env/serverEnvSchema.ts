@@ -11,7 +11,9 @@ export function serverEnvFactory(
 			EMAIL_FROM: z.email(),
 			RESEND_KEY: z.string().nonempty()
 		},
-		client: {},
+		client: {
+			PUBLIC_CLAIMING_ENABLE: z.boolean().default(false)
+		},
 		clientPrefix: 'PUBLIC_',
 		runtimeEnv,
 		emptyStringAsUndefined: true,

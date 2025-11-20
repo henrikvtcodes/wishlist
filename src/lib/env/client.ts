@@ -5,7 +5,8 @@ import { z } from 'zod';
 
 export const clientEnv = createEnv({
 	client: {
-		PUBLIC_CONVEX_URL: z.url()
+		PUBLIC_CONVEX_URL: z.url(),
+		PUBLIC_CLAIMING_ENABLE: z.coerce.boolean().default(false)
 	},
 	clientPrefix: 'PUBLIC_',
 	runtimeEnv,
