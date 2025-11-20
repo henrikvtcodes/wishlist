@@ -2,7 +2,6 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '$lib/components/ui/card';
 	import type { Item } from './types';
-	import * as ButtonGroup from '$lib/components/ui/button-group';
 
 	import currency from 'currency.js';
 	import { Button } from '$lib/components/ui/button';
@@ -16,6 +15,7 @@
 
 	let claimButtonText = $derived.by(() => {
 		let text = 'Claim';
+
 		if (!item.claimable) {
 			text = 'Not claimable';
 		} else if (item.isClaimed) {
@@ -46,7 +46,13 @@
 			>
 		{/if}
 		{#if item.itemUrl !== undefined}
-			<Button class="basis-1/2" variant="secondary">View Item</Button>
+			<Button class="basis-1/2" variant="secondary">
+				{#if item.vendorName !== ''}
+					See item at {item.vendorName}
+				{:else}
+					View item
+				{/if}
+			</Button>
 		{/if}
 	</CardFooter>
 </Card>

@@ -27,7 +27,7 @@ export const allPublicInCategory = query({
 		return items.map((i) =>
 			merge(
 				{ isClaimed: !!i.claimedBy, priceCents: Number(i.priceCents) },
-				pick(i, ['name', 'claimable', 'description', 'imageUrl', 'itemUrl'])
+				pick(i, ['name', 'claimable', 'description', 'imageUrl', 'itemUrl', 'vendorName'])
 			)
 		) satisfies Item[];
 	}

@@ -6,4 +6,5 @@ export type Item = {
 	claimable: boolean;
 	itemUrl?: string | null;
 	imageUrl?: string | null;
+	vendorName: string;
 };
