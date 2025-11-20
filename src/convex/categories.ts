@@ -4,7 +4,8 @@ import { query } from './_generated/server';
 export const all = query({
 	args: {},
 	handler: async (ctx) => {
-		return await ctx.db.query('categories').withIndex('by_priority').order('asc').collect();
+		const cs = await ctx.db.query('categories').withIndex('by_priority').order('asc').collect();
+		return cs.filter((c) => c.priority >= 0);
 	}
 });
 
