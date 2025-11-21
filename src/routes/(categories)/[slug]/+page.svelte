@@ -14,7 +14,7 @@
 	<h1 class="text-4xl">{category.data?.name}</h1>
 </div>
 
-<div class="flex flex-wrap gap-x-4 gap-y-4 px-4 pt-2">
+<div class="flex flex-wrap gap-x-4 gap-y-4 px-4 pt-2 pb-4">
 	{#each items.data as item}
 		<div class="sm:shrink-0 sm:grow-0 sm:basis-1/2 md:basis-1/4">
 			<ItemRenderedViewCard {item} />
