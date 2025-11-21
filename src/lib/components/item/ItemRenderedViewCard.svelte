@@ -27,28 +27,28 @@
 	});
 </script>
 
-<Card class={cn('h-max w-full', classes)}>
+<Card class={cn('', classes)}>
 	<CardHeader><CardTitle>{item.name}</CardTitle></CardHeader>
 
 	{#if item.imageUrl !== undefined && item.imageUrl !== null}
-		<CardContent>
+		<CardContent class="flex justify-center">
 			<img class="rounded" src={item.imageUrl} alt={`Photo of ${item.name}`} />
 		</CardContent>
 	{/if}
 
 	<CardContent>
-		<Badge>{currency(item.priceCents, { fromCents: true }).format()}</Badge>
+		<Badge class="mb-2">{currency(item.priceCents, { fromCents: true }).format()}</Badge>
 		<p>{item.description}</p>
 	</CardContent>
 
-	<CardFooter class="flex gap-x-2">
+	<CardFooter class="mt-auto flex flex-col gap-x-2 gap-y-2">
 		{#if env.PUBLIC_CLAIMING_ENABLE}
-			<Button class="basis-1/2" disabled={item.isClaimed} variant="default"
+			<Button class="w-full md:basis-1/2" disabled={item.isClaimed} variant="default"
 				>{claimButtonText}</Button
 			>
 		{/if}
 		{#if item.itemUrl !== undefined}
-			<Button class="basis-1/2" variant="secondary">
+			<Button href={item.itemUrl} class="w-full lg:basis-1/2" variant="secondary">
 				{#if item.vendorName !== ''}
 					See item at {item.vendorName}
 				{:else}
