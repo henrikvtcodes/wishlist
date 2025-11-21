@@ -10,15 +10,13 @@
 	const items = useQuery(api.items.allPublicInCategory, () => ({ categorySlug: params.slug }));
 </script>
 
-<div class="grid min-h-32 w-screen place-content-center">
+<div class="grid min-h-32 place-content-center">
 	<h1 class="text-4xl">{category.data?.name}</h1>
 </div>
 
-<div class="flex gap-x-4 gap-y-4 px-4 pt-2 pb-4">
+<div class="mt-2 flex flex-wrap gap-x-2 gap-y-2">
 	{#each items.data as item}
-		<div class="sm:grow-0 sm:basis-1/2 md:basis-1/4">
-			<ItemRenderedViewCard {item} />
-		</div>
+		<ItemRenderedViewCard clsx={'grow md:basis-1/2 lg:basis-1/4'} {item} />
 	{/each}
 </div>
 

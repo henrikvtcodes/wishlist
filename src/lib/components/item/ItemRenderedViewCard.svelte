@@ -6,12 +6,14 @@
 	import currency from 'currency.js';
 	import { Button } from '$lib/components/ui/button';
 	import { env } from '$lib/env/client';
+	import { cn } from '$lib/utils';
 
 	type Props = {
 		item: Item;
+		clsx?: string;
 	};
 
-	let { item }: Props = $props();
+	let { item, clsx: classes }: Props = $props();
 
 	let claimButtonText = $derived.by(() => {
 		let text = 'Claim';
@@ -25,7 +27,7 @@
 	});
 </script>
 
-<Card class="h-max w-full">
+<Card class={cn('h-max w-full', classes)}>
 	<CardHeader><CardTitle>{item.name}</CardTitle></CardHeader>
 
 	{#if item.imageUrl !== undefined && item.imageUrl !== null}

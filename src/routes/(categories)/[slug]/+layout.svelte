@@ -8,8 +8,8 @@
 	let { data, children }: LayoutProps = $props();
 </script>
 
-<div class="min-h-screen w-screen max-w-screen">
+<div class="min-h-screen w-screen max-w-screen pb-18">
 	<PublicHeader />
 
-	{@render children()}
+	<div class="w-screen px-4">{@render children()}</div>
 </div>
