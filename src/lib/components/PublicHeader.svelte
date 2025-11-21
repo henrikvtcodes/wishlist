@@ -7,6 +7,7 @@
 	import { env } from '$lib/env/client';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { buttonVariants } from './ui/button';
+	import { cn } from '$lib/utils';
 
 	const categories = useQuery(api.categories.all, {}, () => ({}));
 </script>
@@ -24,14 +25,22 @@
 						{#if categories.data !== null && categories.data !== undefined}
 							{#each categories.data as ct}
 								<DropdownMenu.Item>
-									<a class="underline" href="/{ct.slug}">{ct.name}</a>
+									{#snippet child({ props })}
+										<a {...props} class={cn(`${props.class}`, 'underline')} href="/{ct.slug}"
+											>{ct.name}</a
+										>
+									{/snippet}
 								</DropdownMenu.Item>
 							{/each}
 						{/if}
 						<DropdownMenu.Separator />
 
 						<DropdownMenu.Item>
-							<a class="underline" href="/donate">Donate</a>
+							{#snippet child({ props })}
+								<a {...props} class={cn(`${props.class}`, 'underline')} href="/donate"
+									>Donate to MSF</a
+								>
+							{/snippet}
 						</DropdownMenu.Item>
 					</DropdownMenu.Group>
 				</DropdownMenu.Content>
@@ -44,7 +53,7 @@
 				{/each}
 			{/if}
 
-			<a href="/donate">Donate</a>
+			<a href="/donate">Donate to MSF</a>
 		</div>
 		<div class="shrink-0">
 			{#if env.PUBLIC_CLAIMING_ENABLE}
